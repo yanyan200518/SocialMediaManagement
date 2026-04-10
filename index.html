@@ -426,7 +426,7 @@
         };
 
         // --- QUIZ COMPONENT ---
-        const QuizSection = ({ questions, moduleId, onPass, isPassed }) => {
+        const QuizSection = ({ questions, moduleId, onPass, isPassed, onCancel }) => {
           const [shuffledQuestions, setShuffledQuestions] = useState([]);
           const [answers, setAnswers] = useState({});
           const [submitted, setSubmitted] = useState(false);
@@ -466,31 +466,30 @@
             if(pct >= 90) onPass();
           };
 
-          if (isPassed) {
-            return (
-              <div className="bg-slate-100 p-6 rounded-xl border-l-4 border-slate-900 mt-12 shadow-sm">
-                <h3 className="text-slate-900 font-extrabold text-xl flex items-center gap-2">
-                  <i className="fa-solid fa-circle-check"></i> Module Passed! ({score || 100}%)
-                </h3>
-                <p className="text-slate-700 mt-2 font-medium">You have successfully unlocked the next module.</p>
-              </div>
-            );
-          }
-
           return (
-             <div className="bg-slate-50 border border-slate-300 p-6 md:p-8 rounded-2xl mt-12 shadow-sm">
-               <h3 className="text-2xl font-extrabold text-slate-900 mb-6 border-b border-slate-200 pb-4">
-                 <i className="fa-solid fa-clipboard-check mr-2"></i>Module {moduleId} Quiz (Requirement: 90%)
-               </h3>
+             <div className="bg-slate-50 border border-slate-300 p-6 md:p-8 rounded-2xl shadow-sm">
+               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-slate-200 pb-4">
+                 <h3 className="text-2xl font-extrabold text-slate-900">
+                   <i className="fa-solid fa-clipboard-check mr-2"></i>Module {moduleId} Quiz
+                 </h3>
+                 <button onClick={onCancel} className="text-slate-600 hover:text-slate-900 font-bold text-sm flex items-center gap-2 px-4 py-2 bg-slate-200 rounded-lg hover:bg-slate-300 transition-colors">
+                   <i className="fa-solid fa-book-open"></i> Back to Material
+                 </button>
+               </div>
                
                {submitted && score < 90 ? (
                  <div className="bg-white border-2 border-slate-800 text-slate-900 p-8 rounded-xl text-center shadow-sm">
                    <i className="fa-solid fa-triangle-exclamation text-slate-600 text-4xl mb-4"></i>
                    <h4 className="text-2xl font-extrabold mb-2">Score: {score}%</h4>
                    <p className="text-slate-600 font-medium mb-6">You need 90% (9/10) to proceed. You did not meet the requirement.</p>
-                   <button onClick={initQuiz} className="px-8 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-black transition-colors shadow-md">
-                     <i className="fa-solid fa-rotate-right mr-2"></i> Retake Quiz
-                   </button>
+                   <div className="flex flex-col sm:flex-row justify-center gap-4">
+                     <button onClick={initQuiz} className="px-8 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-black transition-colors shadow-md">
+                       <i className="fa-solid fa-rotate-right mr-2"></i> Retake Quiz
+                     </button>
+                     <button onClick={onCancel} className="px-8 py-3 bg-slate-200 text-slate-900 font-bold rounded-lg hover:bg-slate-300 transition-colors shadow-md">
+                       <i className="fa-solid fa-book-open mr-2"></i> Review Material
+                     </button>
+                   </div>
                  </div>
                ) : (
                  <>
@@ -1026,6 +1025,7 @@
           const [activeModuleId, setActiveModuleId] = useState(1);
           const [sidebarOpen, setSidebarOpen] = useState(false);
           const [unlockedModules, setUnlockedModules] = useState([1]); // Only module 1 unlocked by default
+          const [isQuizMode, setIsQuizMode] = useState(false);
 
           const activeModule = COURSE_DATA.find(m => m.id === activeModuleId);
           const progress = (unlockedModules.length / COURSE_DATA.length) * 100;
@@ -1089,7 +1089,7 @@
                       return (
                         <li key={mod.id}>
                           <button
-                            onClick={() => { if(isUnlocked) { setActiveModuleId(mod.id); setSidebarOpen(false); } }}
+                            onClick={() => { if(isUnlocked) { setActiveModuleId(mod.id); setIsQuizMode(false); setSidebarOpen(false); document.getElementById('main-scroll-area').scrollTo(0,0); } }}
                             disabled={!isUnlocked}
                             className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 text-left border 
                               ${isActive ? 'bg-white text-slate-900 font-bold border-slate-200 shadow-sm border-l-4 border-l-slate-900' : 
@@ -1130,106 +1130,138 @@
                 <div className="flex-1 overflow-y-auto p-5 md:p-10 custom-scrollbar pb-32 bg-white scroll-smooth" id="main-scroll-area">
                   <div className="max-w-4xl mx-auto space-y-12">
                     
-                    {activeModule.content.map((section, idx) => (
-                      <div key={idx} className="space-y-5 relative">
-                        
-                        {/* Render Text Content */}
-                        {section.subtitle && (
-                          <h3 className="text-xl md:text-2xl font-extrabold text-slate-800 border-b-2 border-slate-100 pb-3 inline-block">
-                            {section.subtitle}
-                          </h3>
-                        )}
-                        
-                        {section.text && (
-                          <p 
-                            className="text-slate-700 leading-relaxed text-base font-medium"
-                            dangerouslySetInnerHTML={{__html: section.text}}
-                          />
-                        )}
-                        
-                        {section.list && (
-                          <ul className="space-y-3.5 mt-4">
-                            {section.list.map((item, i) => (
-                              <li key={i} className="flex items-start gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800 text-base font-medium shadow-sm hover:shadow-md transition-shadow">
-                                <i className="fa-solid fa-chevron-right w-5 h-5 text-slate-900 flex-shrink-0 mt-0.5"></i>
-                                <span dangerouslySetInnerHTML={{__html: item.replace(/^([^:]+):/, '<strong class="font-black text-slate-900">$1:</strong>')}} />
-                              </li>
-                            ))}
-                          </ul>
-                        )}
+                    {!isQuizMode ? (
+                      <>
+                        {activeModule.content.map((section, idx) => (
+                          <div key={idx} className="space-y-5 relative">
+                            
+                            {/* Render Text Content */}
+                            {section.subtitle && (
+                              <h3 className="text-xl md:text-2xl font-extrabold text-slate-800 border-b-2 border-slate-100 pb-3 inline-block">
+                                {section.subtitle}
+                              </h3>
+                            )}
+                            
+                            {section.text && (
+                              <p 
+                                className="text-slate-700 leading-relaxed text-base font-medium"
+                                dangerouslySetInnerHTML={{__html: section.text}}
+                              />
+                            )}
+                            
+                            {section.list && (
+                              <ul className="space-y-3.5 mt-4">
+                                {section.list.map((item, i) => (
+                                  <li key={i} className="flex items-start gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800 text-base font-medium shadow-sm hover:shadow-md transition-shadow">
+                                    <i className="fa-solid fa-chevron-right w-5 h-5 text-slate-900 flex-shrink-0 mt-0.5"></i>
+                                    <span dangerouslySetInnerHTML={{__html: item.replace(/^([^:]+):/, '<strong class="font-black text-slate-900">$1:</strong>')}} />
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
 
-                        {/* Render Interactive Element embedded within the loop if passed here */}
-                        {section.interactive && (
-                          <div className="mt-6">
-                            {section.interactive}
+                            {/* Render Interactive Element embedded within the loop if passed here */}
+                            {section.interactive && (
+                              <div className="mt-6">
+                                {section.interactive}
+                              </div>
+                            )}
+
+                            {/* Render Video Iframe */}
+                            {section.video && (
+                              <div className="my-8 rounded-2xl overflow-hidden border border-slate-300 shadow-sm bg-slate-100 aspect-video relative">
+                                 <iframe 
+                                    src={section.video.split('?')[0]} 
+                                    title={`Video for ${activeModule.title}`} 
+                                    className="absolute inset-0 w-full h-full"
+                                    frameBorder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen>
+                                 </iframe>
+                              </div>
+                            )}
+
+                          </div>
+                        ))}
+
+                        {/* Render Module-Level Interactive Element if it exists */}
+                        {activeModule.interactive && !activeModule.content.some(c => c.interactive) && (
+                          <div className="mt-12 pt-8 border-t border-slate-200">
+                            {activeModule.interactive}
                           </div>
                         )}
 
-                        {/* Render Video Iframe */}
-                        {section.video && (
-                          <div className="my-8 rounded-2xl overflow-hidden border border-slate-300 shadow-sm bg-slate-100 aspect-video relative">
-                             <iframe 
-                                src={section.video.split('?')[0]} 
-                                title={`Video for ${activeModule.title}`} 
-                                className="absolute inset-0 w-full h-full"
-                                frameBorder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                allowFullScreen>
-                             </iframe>
+                        {/* Strict Module Quiz Section */}
+                        {activeModule.quiz && (
+                          <div className="mt-12 pt-8 border-t border-slate-200">
+                            {isCurrentModulePassed ? (
+                              <div className="bg-slate-100 p-6 rounded-xl border-l-4 border-slate-900 shadow-sm">
+                                <h3 className="text-slate-900 font-extrabold text-xl flex items-center gap-2">
+                                  <i className="fa-solid fa-circle-check text-slate-800"></i> Module Passed!
+                                </h3>
+                                <p className="text-slate-700 mt-2 font-medium">You have successfully passed the quiz for this module.</p>
+                              </div>
+                            ) : (
+                              <div className="text-center bg-slate-50 border border-slate-200 p-8 rounded-2xl shadow-sm">
+                                <h3 className="text-2xl font-extrabold text-slate-900 mb-2">Ready to test your knowledge?</h3>
+                                <p className="text-slate-600 font-medium mb-6">You must score 90% or higher to unlock the next module. Course materials will be hidden while taking the quiz.</p>
+                                <button onClick={() => { setIsQuizMode(true); document.getElementById('main-scroll-area').scrollTo(0,0); }} className="px-8 py-4 bg-slate-900 text-white font-extrabold text-lg rounded-xl hover:bg-black transition-all shadow-md">
+                                  <i className="fa-solid fa-play mr-2"></i> Start Module {activeModule.id} Quiz
+                                </button>
+                              </div>
+                            )}
                           </div>
                         )}
 
-                      </div>
-                    ))}
+                        {/* Navigation Buttons */}
+                        <div className="flex justify-between items-center pt-12 mt-16 border-t border-slate-200">
+                          <button 
+                            onClick={() => {
+                              setActiveModuleId(Math.max(1, activeModuleId - 1));
+                              setIsQuizMode(false);
+                              document.getElementById('main-scroll-area').scrollTo(0,0);
+                            }}
+                            disabled={activeModuleId === 1}
+                            className="px-6 py-3 rounded-xl border-2 border-slate-300 text-slate-700 font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:border-slate-900 hover:text-slate-900 transition-colors text-sm"
+                          >
+                            Previous Module
+                          </button>
 
-                    {/* Render Module-Level Interactive Element if it exists */}
-                    {activeModule.interactive && !activeModule.content.some(c => c.interactive) && (
-                      <div className="mt-12 pt-8 border-t border-slate-200">
-                        {activeModule.interactive}
-                      </div>
-                    )}
-
-                    {/* Strict Module Quiz Section */}
-                    {activeModule.quiz && (
-                       <QuizSection 
-                          questions={activeModule.quiz} 
-                          moduleId={activeModule.id} 
-                          onPass={handleModulePass} 
-                          isPassed={isCurrentModulePassed}
-                       />
-                    )}
-
-                    {/* Navigation Buttons */}
-                    <div className="flex justify-between items-center pt-12 mt-16 border-t border-slate-200">
-                      <button 
-                        onClick={() => {
-                          setActiveModuleId(Math.max(1, activeModuleId - 1));
+                          {isCurrentModulePassed ? (
+                            <button 
+                              onClick={() => {
+                                setActiveModuleId(Math.min(COURSE_DATA.length, activeModuleId + 1));
+                                setIsQuizMode(false);
+                                document.getElementById('main-scroll-area').scrollTo(0,0);
+                              }}
+                              disabled={activeModuleId === COURSE_DATA.length}
+                              className="px-6 py-3 rounded-xl bg-slate-900 text-white font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black transition-colors flex items-center gap-2 text-sm shadow-md"
+                            >
+                              {activeModuleId === COURSE_DATA.length ? 'Course Completed' : 'Next Module'} <i className="fa-solid fa-play w-4 h-4"></i>
+                            </button>
+                          ) : (
+                            <div className="px-6 py-3 rounded-xl bg-slate-100 text-slate-400 font-bold border border-slate-200 flex items-center gap-2 text-sm cursor-not-allowed">
+                              <i className="fa-solid fa-lock"></i> Pass Quiz to Unlock Next
+                            </div>
+                          )}
+                        </div>
+                      </>
+                    ) : (
+                      <QuizSection 
+                        questions={activeModule.quiz} 
+                        moduleId={activeModule.id} 
+                        onPass={() => {
+                          handleModulePass();
+                          setIsQuizMode(false);
+                        }} 
+                        isPassed={isCurrentModulePassed}
+                        onCancel={() => {
+                          setIsQuizMode(false);
                           document.getElementById('main-scroll-area').scrollTo(0,0);
                         }}
-                        disabled={activeModuleId === 1}
-                        className="px-6 py-3 rounded-xl border-2 border-slate-300 text-slate-700 font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:border-slate-900 hover:text-slate-900 transition-colors text-sm"
-                      >
-                        Previous Module
-                      </button>
-
-                      {isCurrentModulePassed ? (
-                        <button 
-                          onClick={() => {
-                            setActiveModuleId(Math.min(COURSE_DATA.length, activeModuleId + 1));
-                            document.getElementById('main-scroll-area').scrollTo(0,0);
-                          }}
-                          disabled={activeModuleId === COURSE_DATA.length}
-                          className="px-6 py-3 rounded-xl bg-slate-900 text-white font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black transition-colors flex items-center gap-2 text-sm shadow-md"
-                        >
-                          {activeModuleId === COURSE_DATA.length ? 'Course Completed' : 'Next Module'} <i className="fa-solid fa-play w-4 h-4"></i>
-                        </button>
-                      ) : (
-                        <div className="px-6 py-3 rounded-xl bg-slate-100 text-slate-400 font-bold border border-slate-200 flex items-center gap-2 text-sm cursor-not-allowed">
-                          <i className="fa-solid fa-lock"></i> Pass Quiz to Unlock Next
-                        </div>
-                      )}
-                    </div>
+                      />
+                    )}
 
                   </div>
                 </div>
