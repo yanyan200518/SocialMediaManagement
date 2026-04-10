@@ -1,781 +1,24 @@
-import React, { useState } from 'react';
-import { 
-  BookOpen, Monitor, Share2, PenTool, Cpu, Globe, Search, 
-  Users, Layers, Mail, BarChart, TrendingUp, Edit3, Hash, 
-  Target, Crosshair, FileText, CheckCircle, ChevronRight, Menu, X, Play, LayoutDashboard
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing for Virtual Assistants</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-// --- INTERACTIVE COMPONENTS (MONOCHROMATIC BRANDING) ---
+    <!-- Load React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    
+    <!-- Load Babel to compile JSX in the browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-const BrandIdentityViewer = () => {
-  const [activeColor, setActiveColor] = useState('#000000');
-  const [activeFont, setActiveFont] = useState('font-sans');
-
-  const colors = [
-    { hex: '#000000', name: 'Primary (Black)', desc: 'Authority, Elegance' },
-    { hex: '#475569', name: 'Secondary (Slate)', desc: 'Professionalism, Depth' },
-    { hex: '#94A3B8', name: 'Accent (Gray)', desc: 'Modern, Minimal' },
-    { hex: '#FFFFFF', name: 'Neutral (White)', desc: 'Clarity, Simplicity' },
-  ];
-
-  return (
-    <div className="bg-white p-6 rounded-xl border border-slate-300 my-6 shadow-sm">
-      <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
-        <PenTool className="w-5 h-5 text-slate-700" /> Interactive: Monochromatic Palette Tester
-      </h4>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
-        <div>
-          <p className="text-sm font-bold text-slate-700 mb-2">Select Primary Color</p>
-          <div className="flex flex-wrap gap-3 mb-6">
-            {colors.map(c => (
-              <button 
-                key={c.hex} 
-                onClick={() => setActiveColor(c.hex)}
-                className={`w-12 h-12 rounded-full border-4 shadow-sm transition-transform ${activeColor === c.hex ? 'border-slate-800 scale-110' : 'border-slate-200 hover:scale-105'}`}
-                style={{ backgroundColor: c.hex }}
-                title={c.name}
-              />
-            ))}
-          </div>
-          <p className="text-sm font-bold text-slate-700 mb-2">Select Typography</p>
-          <div className="flex gap-2">
-            <button onClick={() => setActiveFont('font-sans')} className={`px-4 py-2 rounded-lg font-bold transition-colors border ${activeFont === 'font-sans' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}`}>Sans-serif (Modern)</button>
-            <button onClick={() => setActiveFont('font-serif')} className={`px-4 py-2 rounded-lg font-bold transition-colors border ${activeFont === 'font-serif' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}`}>Serif (Traditional)</button>
-          </div>
-        </div>
-        <div 
-          className={`p-6 rounded-xl border border-slate-200 flex flex-col justify-center items-center text-center transition-all duration-300 ${activeFont}`}
-          style={{ backgroundColor: activeColor, color: activeColor === '#FFFFFF' ? '#000000' : '#FFFFFF' }}
-        >
-          <h1 className="text-3xl font-extrabold mb-3">Sample Headline</h1>
-          <p className="text-sm font-medium leading-relaxed opacity-90">This illustrates how your selected typography renders against a monochromatic brand color. High contrast is vital for readability.</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const AIPromptBuilder = () => {
-  const [subject, setSubject] = useState('professional working on a laptop');
-  const [style, setStyle] = useState('documentary style');
-  const [lighting, setLighting] = useState('natural lighting');
-
-  return (
-    <div className="bg-slate-50 p-6 rounded-xl border border-slate-300 shadow-sm my-6">
-      <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-200 pb-3">
-        <Cpu className="w-5 h-5 text-slate-700" /> Interactive: AI Image Prompt Builder
-      </h4>
-      <div className="space-y-4 pt-2">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1">Subject</label>
-            <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow bg-white" />
-          </div>
-          <div>
-            <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1">Style</label>
-            <select value={style} onChange={(e) => setStyle(e.target.value)} className="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow bg-white">
-              <option>documentary style</option>
-              <option>hyper-realistic</option>
-              <option>black and white photography</option>
-              <option>cinematic grayscale</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1">Lighting</label>
-            <select value={lighting} onChange={(e) => setLighting(e.target.value)} className="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow bg-white">
-              <option>natural lighting</option>
-              <option>harsh studio lighting</option>
-              <option>soft moody shadows</option>
-            </select>
-          </div>
-        </div>
-        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
-          <p className="text-xs font-extrabold text-slate-900 mb-1 uppercase tracking-wider">Generated Prompt:</p>
-          <p className="text-slate-700 font-mono text-sm leading-relaxed">
-            "A high quality image of a {subject}, {lighting}, soft shadows, {style}, slightly off-center composition, 8k resolution, highly detailed."
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const AIComparisonTable = () => {
-  return (
-    <div className="bg-white border border-slate-300 rounded-xl overflow-hidden my-6 shadow-sm">
-      <div className="bg-slate-100 px-6 py-4 border-b border-slate-300 flex items-center gap-3">
-        <div className="p-2 bg-slate-200 rounded-lg"><Layers className="w-5 h-5 text-slate-800" /></div>
-        <h4 className="font-bold text-slate-900">AI Tool Comparison Matrix</h4>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-white border-b border-slate-200 text-slate-600">
-            <tr>
-              <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">AI Model</th>
-              <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">Best Used For</th>
-              <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">Key Strengths & Notes</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            <tr className="hover:bg-slate-50 transition-colors">
-              <td className="px-6 py-4">
-                <a href="https://chat.openai.com" target="_blank" rel="noreferrer" className="font-extrabold text-slate-900 underline decoration-slate-400 hover:decoration-slate-900">ChatGPT</a>
-              </td>
-              <td className="px-6 py-4 text-slate-800 font-bold">Copywriting & Abstract Images</td>
-              <td className="px-6 py-4 text-slate-600">Excellent at structuring text, adapting to different conversational tones, and using DALL-E for creative visual generation.</td>
-            </tr>
-            <tr className="hover:bg-slate-50 transition-colors">
-              <td className="px-6 py-4">
-                <a href="https://claude.ai" target="_blank" rel="noreferrer" className="font-extrabold text-slate-900 underline decoration-slate-400 hover:decoration-slate-900">Claude</a>
-              </td>
-              <td className="px-6 py-4 text-slate-800 font-bold">Copywriting & Coding</td>
-              <td className="px-6 py-4 text-slate-600">Produces highly nuanced, "human-like" text with great flow. Exceptional at understanding complex logic and debugging.</td>
-            </tr>
-            <tr className="hover:bg-slate-50 transition-colors">
-              <td className="px-6 py-4">
-                <a href="https://gemini.google.com" target="_blank" rel="noreferrer" className="font-extrabold text-slate-900 underline decoration-slate-400 hover:decoration-slate-900">Gemini</a>
-              </td>
-              <td className="px-6 py-4 text-slate-800 font-bold">Hyper-Realistic Images</td>
-              <td className="px-6 py-4 text-slate-600">Unmatched at generating hyper-realistic, photographic images. Highly capable at Google Workspace integration.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-};
-
-const SEOSimulator = () => {
-  return (
-    <div className="bg-slate-50 border border-slate-300 rounded-xl p-6 my-6 shadow-sm">
-      <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-200 pb-3">
-        <Globe className="w-5 h-5 text-slate-700" /> Interactive: Mock Search Engine Results Page (SERP)
-      </h4>
-      <p className="text-sm text-slate-600 mb-6 pt-2">This illustrates the visual difference between Paid Search (Ads) and Organic Search (SEO).</p>
-      
-      <div className="bg-white border-2 border-slate-300 rounded-full px-5 py-3 mb-8 flex items-center gap-3 max-w-xl shadow-sm">
-        <Search className="w-5 h-5 text-slate-500" />
-        <span className="text-sm font-bold text-slate-800">virtual assistant for digital marketing</span>
-      </div>
-
-      {/* Sponsored Result */}
-      <div className="mb-8 pb-8 border-b border-slate-200">
-        <div className="flex items-center gap-3 mb-2">
-          <span className="text-[11px] font-bold bg-slate-200 text-slate-800 px-2 py-0.5 rounded uppercase tracking-wider border border-slate-300">Sponsored</span>
-          <span className="text-xs text-slate-500 font-mono font-semibold">www.elite-va-agency.com</span>
-        </div>
-        <h3 className="text-xl font-extrabold text-slate-900 underline decoration-slate-400 cursor-pointer hover:decoration-slate-900">Hire Top Digital Marketing VAs - Start Today</h3>
-        <p className="text-sm text-slate-700 mt-2 leading-relaxed font-medium">Scale your business instantly with our pre-vetted marketing virtual assistants. We handle social media, copywriting, and SEO. Book a discovery call today.</p>
-      </div>
-
-      {/* Organic Result 1 */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs text-slate-500 font-mono font-semibold">www.business-growth-blog.com/seo</span>
-        </div>
-        <h3 className="text-xl font-extrabold text-slate-900 underline decoration-slate-400 cursor-pointer hover:decoration-slate-900">10 Reasons Why You Need a Digital Marketing VA</h3>
-        <p className="text-sm text-slate-700 mt-2 leading-relaxed font-medium">A digital marketing virtual assistant can help you manage your digital presence, schedule posts, optimize for SEO, and reply to your audience to increase engagement...</p>
-      </div>
-      
-      {/* Organic Result 2 */}
-      <div className="mb-4">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs text-slate-500 font-mono font-semibold">www.freelance-tips.org/virtual-assistant</span>
-        </div>
-        <h3 className="text-xl font-extrabold text-slate-900 underline decoration-slate-400 cursor-pointer hover:decoration-slate-900">How to Become a Certified Social Media Manager</h3>
-        <p className="text-sm text-slate-700 mt-2 leading-relaxed font-medium">Learn the skills needed to offer professional social media and digital marketing services to clients. A comprehensive guide on tools, strategies, and client outreach...</p>
-      </div>
-    </div>
-  );
-};
-
-const CaptionSimulator = () => {
-  const [hook, setHook] = useState('Your content can look good and still fail to perform.');
-  const [body, setBody] = useState('A strong visual is only one part of digital marketing. If your caption does not guide the reader, build interest, or provide a next step, your post may get attention but not results.');
-  const [cta, setCta] = useState('Review your last 3 captions and check if they tell the audience what to do next.');
-  const [hashtags, setHashtags] = useState('#DigitalMarketing #VirtualAssistant');
-
-  return (
-    <div className="bg-white border border-slate-300 p-6 rounded-xl my-6 flex flex-col md:flex-row gap-8 shadow-sm">
-      <div className="flex-1 space-y-4">
-        <h4 className="text-lg font-bold flex items-center gap-2 text-slate-900 border-b border-slate-200 pb-3">
-          <div className="p-1.5 bg-slate-100 border border-slate-200 rounded-md"><Edit3 className="w-5 h-5 text-slate-800" /></div>
-          Caption Builder Simulator
-        </h4>
-        <div className="pt-2">
-          <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1 tracking-wider">1. Hook (Catches attention)</label>
-          <input type="text" value={hook} onChange={e=>setHook(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow" />
-        </div>
-        <div>
-          <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1 tracking-wider">2. Body (Provides context)</label>
-          <textarea value={body} onChange={e=>setBody(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm h-28 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow" />
-        </div>
-        <div>
-          <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1 tracking-wider">3. Call To Action (CTA)</label>
-          <input type="text" value={cta} onChange={e=>setCta(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow" />
-        </div>
-        <div>
-          <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1 tracking-wider">4. Hashtags</label>
-          <input type="text" value={hashtags} onChange={e=>setHashtags(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm text-slate-800 font-mono focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow" />
-        </div>
-      </div>
-      
-      {/* Smartphone Preview */}
-      <div className="w-full md:w-72 bg-white text-slate-900 rounded-[2.5rem] border-[10px] border-slate-900 overflow-hidden shadow-2xl flex flex-col relative">
-        <div className="absolute top-0 inset-x-0 h-5 bg-slate-900 rounded-b-2xl w-36 mx-auto z-10"></div>
-        <div className="h-56 bg-slate-100 flex flex-col items-center justify-center border-b border-slate-200 relative overflow-hidden">
-           <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-400 via-transparent to-transparent"></div>
-          <span className="text-slate-500 text-sm font-extrabold tracking-widest uppercase relative z-10">[ Visual Art ]</span>
-        </div>
-        <div className="p-5 flex-1 overflow-y-auto text-[13px] custom-scrollbar">
-          <p className="font-extrabold mb-2 text-slate-900">brand_name</p>
-          <p className="font-bold mb-2 text-slate-900">{hook}</p>
-          <p className="text-slate-700 mb-3 whitespace-pre-wrap leading-relaxed">{body}</p>
-          <p className="font-bold mb-3 text-slate-900">{cta}</p>
-          <p className="text-slate-600 font-mono text-xs font-semibold">{hashtags}</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const SEMrushSimulator = () => {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState(null);
-
-  const mockDb = {
-    'social media': [
-      { keyword: 'social media management', vol: '14,000', kd: 45, intent: 'Commercial' },
-      { keyword: 'social media manager vs virtual assistant', vol: '1,200', kd: 22, intent: 'Informational' },
-      { keyword: 'social media tools', vol: '8,100', kd: 55, intent: 'Transactional' },
-    ],
-    'virtual assistant': [
-      { keyword: 'virtual assistant services', vol: '22,000', kd: 60, intent: 'Commercial' },
-      { keyword: 'how to become a virtual assistant', vol: '18,000', kd: 40, intent: 'Informational' },
-      { keyword: 'digital marketing virtual assistant', vol: '3,600', kd: 35, intent: 'Commercial' },
-    ]
-  };
-
-  const handleSearch = () => {
-    const key = query.toLowerCase();
-    if (key.includes('social')) setResults(mockDb['social media']);
-    else if (key.includes('virtual')) setResults(mockDb['virtual assistant']);
-    else setResults([{ keyword: `${query} for beginners`, vol: '450', kd: 15, intent: 'Informational' }]);
-  };
-
-  return (
-    <div className="bg-white border border-slate-300 shadow-sm rounded-xl p-6 my-6">
-      <div className="flex items-center gap-3 mb-6 border-b border-slate-200 pb-4">
-        <div className="bg-slate-900 p-2.5 rounded-lg"><Search className="w-5 h-5 text-white" /></div>
-        <h4 className="text-lg font-bold text-slate-900">SEMrush Mock Keyword Tool</h4>
-      </div>
-      
-      <div className="flex gap-2 mb-6">
-        <input 
-          type="text" 
-          placeholder="Try 'social media' or 'virtual assistant'..."
-          className="flex-1 border border-slate-300 rounded-lg px-4 py-2.5 text-sm focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow bg-slate-50"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button onClick={handleSearch} className="bg-slate-900 hover:bg-black text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-colors shadow-sm">
-          Analyze
-        </button>
-      </div>
-
-      {results && (
-        <div className="overflow-x-auto rounded-lg border border-slate-200">
-          <table className="w-full text-sm text-left">
-            <thead className="bg-slate-100 text-slate-700 text-xs uppercase tracking-wider">
-              <tr>
-                <th className="px-5 py-4 font-extrabold">Keyword</th>
-                <th className="px-5 py-4 font-extrabold">Intent</th>
-                <th className="px-5 py-4 font-extrabold">Volume (Mo.)</th>
-                <th className="px-5 py-4 font-extrabold">KD % (Difficulty)</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-200 bg-white">
-              {results.map((res, idx) => (
-                <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                  <td className="px-5 py-4 font-bold text-slate-900">{res.keyword}</td>
-                  <td className="px-5 py-4">
-                    <span className={`px-2.5 py-1 rounded-md text-[11px] font-extrabold tracking-wide border ${res.intent === 'Informational' ? 'bg-slate-100 text-slate-600 border-slate-300' : 'bg-slate-800 text-white border-slate-900'}`}>
-                      {res.intent}
-                    </span>
-                  </td>
-                  <td className="px-5 py-4 font-mono font-bold text-slate-700">{res.vol}</td>
-                  <td className="px-5 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-full bg-slate-200 rounded-full h-2.5 max-w-[80px] overflow-hidden">
-                        <div className={`h-2.5 rounded-full ${res.kd > 50 ? 'bg-slate-800' : res.kd > 30 ? 'bg-slate-500' : 'bg-slate-300'}`} style={{width: `${res.kd}%`}}></div>
-                      </div>
-                      <span className="text-xs font-extrabold text-slate-900">{res.kd}</span>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
-  );
-};
-
-// --- LINK HELPER (MONOCHROMATIC) ---
-const linkStyle = "text-slate-900 underline decoration-slate-400 hover:decoration-slate-900 font-bold transition-colors";
-
-// --- COURSE DATA ---
-const COURSE_DATA = [
-  {
-    id: 1, title: "Principles of Marketing & Course Setup", icon: BookOpen,
-    content: [
-      { subtitle: "1.1 How to Use This Course (Best Practices)", text: "This course is highly interactive and practical. For the best learning experience, we highly recommend a <strong>split-screen setup</strong>. <br/><br/>If you have dual monitors, keep this course open on one screen and the software (like Canva, SEMrush, or GoHighLevel) open on the other. If you are using a single monitor, split your browser windows side-by-side or use dual tabs. Do not just read—open the tools and follow along as you go." },
-      { subtitle: "1.2 Definition & Philosophy", text: "Marketing is far more than just advertising. It is the structured process of identifying human or business needs, engineering a solution that provides genuine value, and effectively communicating that value to facilitate a transaction. It relies heavily on psychology and market research to understand what the consumer truly desires before a product is even made." },
-      { subtitle: "1.3 Inbound vs Outbound Marketing", list: [
-        "Inbound Marketing: Magnetizing customers to your business by creating valuable content (Blogs, SEO, Social Media) that answers their questions.",
-        "Outbound Marketing: Pushing your message out to a broad audience, hoping to catch potential customers (Cold calling, TV ads, Billboards)."
-      ]},
-      { subtitle: "1.4 The Advanced Marketing Funnel", list: [
-        "Top of Funnel (TOFU) - Awareness: The user has a problem but doesn't know the solution. Your goal is education.",
-        "Middle of Funnel (MOFU) - Consideration: The user knows the solutions available and is comparing options. Your goal is building trust.",
-        "Bottom of Funnel (BOFU) - Conversion: The user is ready to buy. Your goal is removing friction and providing a strong Call-to-Action (CTA).",
-        "Retention & Advocacy: Marketing doesn't stop at the sale. Keeping the customer happy so they refer others is the most profitable phase."
-      ]}
-    ]
-  },
-  {
-    id: 2, title: "Digital Marketing", icon: Globe,
-    content: [
-      { subtitle: "2.1 The Digital Landscape", text: "Digital marketing encompasses all marketing efforts that use an electronic device or the internet. Unlike traditional marketing, digital marketing allows for precise targeting and real-time tracking, meaning a business can see exactly how many people clicked an ad and whether or not it resulted in a sale." },
-      { video: "https://www.youtube.com/embed/bixR-KIJKYM" },
-      { subtitle: "2.2 B2B vs B2C Digital Marketing", list: [
-        "B2B (Business to Business): Focuses on logic, ROI, and long decision-making cycles. LinkedIn and Email Marketing dominate here.",
-        "B2C (Business to Consumer): Focuses on emotion, quick decisions, and entertainment. Platforms like Instagram, TikTok, and Facebook are critical."
-      ]},
-      { subtitle: "2.3 The Digital Marketing Ecosystem", list: [
-        "Paid Media: Anything you pay for (Google Ads, Facebook Ads, Sponsored Content).",
-        "Owned Media: Assets you control completely (Your Website, Your Email List, Your Blog).",
-        "Earned Media: When others talk about you for free (Customer Reviews, PR mentions, Viral shares)."
-      ]}
-    ]
-  },
-  {
-    id: 3, title: "Social Media Management", icon: Share2,
-    content: [
-      { subtitle: "3.1 Understanding Social Algorithms", text: "A Social Media Manager must understand that platforms do not show your posts to all your followers. Algorithms dictate visibility based on 'Signals' like watch time, saves, and comments. The algorithm's only goal is to keep users on the app longer; if your content does that, you will be rewarded with reach." },
-      { video: "https://www.youtube.com/embed/U0keUj6EoDM" },
-      { video: "https://www.youtube.com/embed/q4OWKoUUjdY" },
-      { subtitle: "3.2 Content Pillars & Strategy", text: "Content shouldn't be random. A Virtual Assistant should develop 3 to 5 'Content Pillars' for a brand. For example, a fitness brand's pillars might be: 1) Workout Tutorials, 2) Nutrition Myths, 3) Client Success Stories, and 4) Behind-the-Scenes. This ensures a consistent brand voice." },
-      { subtitle: "3.3 Community Management", list: [
-        "Proactive Engagement: Leaving thoughtful comments on target audience accounts before they even follow you.",
-        "Reactive Engagement: Replying to DMs and comments quickly. This trains the algorithm that your account is highly active.",
-        "Crisis Management: Knowing how to professionally respond to a negative review or angry customer publicly."
-      ]}
-    ]
-  },
-  {
-    id: 4, title: "Graphic Design for Marketing", icon: PenTool, interactive: <BrandIdentityViewer />,
-    content: [
-      { subtitle: "4.1 The Psychology of Design", text: "Graphic design in marketing is not about making things 'pretty'; it is about directing the viewer's eye. Good design reduces cognitive load, meaning the customer understands your offer instantly without having to think." },
-      { subtitle: "4.2 Deep Dive into Design Principles", list: [
-        "Visual Hierarchy: The most important element (like the Hook or the Sale Price) should be the largest and boldest.",
-        "Negative Space: Also known as white space. Clutter confuses buyers. Giving text room to breathe increases readability and perceived luxury.",
-        "The Rule of Thirds: Dividing an image into a 3x3 grid and placing the focal point on the intersecting lines makes the graphic more dynamic."
-      ]},
-      { subtitle: "4.3 Core Brand Colors", text: "Selecting brand colors requires an understanding of psychology. A medical business might use Blue for trust. A fast-food chain uses Red and Yellow to trigger urgency and hunger. Stick to 1 Primary color, 1 Secondary, and 2 Neutrals." },
-      { subtitle: "4.4 Understanding Hex Codes", text: "A <strong>Hex Code</strong> is a 6-symbol code (composed of numbers and letters) used in digital design to represent a specific, exact color. It always begins with a hashtag (#). For example, #000000 is pure black, and #FFFFFF is pure white. As a VA, you will copy and paste these Hex Codes into tools like Canva, GoHighLevel, or WordPress to guarantee brand consistency across every single post and web page." },
-      { subtitle: "4.5 Essential Design Tools", list: [
-        `Free / Browser-Based: <a href="https://www.canva.com" target="_blank" class="${linkStyle}">Canva</a> (Best for quick templates), <a href="https://www.figma.com" target="_blank" class="${linkStyle}">Figma</a> (Best for UI/Layouts), <a href="https://www.photopea.com" target="_blank" class="${linkStyle}">Photopea</a> (Free Photoshop clone)`,
-        `Advanced / Professional: <a href="https://www.adobe.com/products/photoshop.html" target="_blank" class="${linkStyle}">Adobe Photoshop</a>, <a href="https://www.adobe.com/products/illustrator.html" target="_blank" class="${linkStyle}">Adobe Illustrator</a>`
-      ]}
-    ]
-  },
-  {
-    id: 5, title: "Artificial Intelligence in Marketing", icon: Cpu, interactive: <AIPromptBuilder />,
-    content: [
-      { subtitle: "5.1 The Role of an AI-Enhanced VA", text: "Artificial Intelligence will not replace Virtual Assistants; Virtual Assistants who use AI will replace those who do not. AI is a multiplier. It allows you to write 10 caption drafts in seconds, generate stock-quality images without a budget, and analyze spreadsheets of data instantly." },
-      { subtitle: "5.2 Advanced Copywriting with AI", text: "The biggest mistake beginners make is asking AI to 'write a post about SEO' and pasting the result. This sounds robotic. Instead, use 'Few-Shot Prompting': Give the AI 3 examples of your client's past successful posts, and then ask it to write a new one matching that exact tone.", list: [
-        `<a href="https://chatgpt.com" target="_blank" class="${linkStyle}">ChatGPT</a>: Excellent for brainstorming, outlining, and formatting data tables.`,
-        `<a href="https://claude.ai" target="_blank" class="${linkStyle}">Claude</a>: Superior for long-form writing; it naturally avoids cringey AI buzzwords like 'Delve' or 'Tapestry'.`
-      ]},
-      { subtitle: "5.3 Image Generation Mastery", text: "When prompting for images, you must act like a film director. Specify the camera angle, the lighting, the subject, and the lens.", list: [
-        `<a href="https://gemini.google.com" target="_blank" class="${linkStyle}">Gemini</a>: Highly recommended for hyper-realistic images and maintaining accurate human anatomy.`,
-        `<a href="https://www.midjourney.com" target="_blank" class="${linkStyle}">Midjourney</a> & DALL-E: Great for artistic, abstract, or highly stylized conceptual art.`
-      ]},
-      { subtitle: "5.4 Tool Comparison Matrix", text: "Understanding which AI tool to deploy for which specific VA task is crucial for efficiency.", interactive: <AIComparisonTable /> }
-    ]
-  },
-  {
-    id: 6, title: "Websites and Domains", icon: Monitor,
-    content: [
-      { subtitle: "6.1 Anatomy of the Web", text: "A website is your digital real estate. A Domain (like yourbusiness.com) is the street address. Hosting is the plot of land you rent to build the house on. Without all three, a website cannot exist on the internet." },
-      { video: "https://www.youtube.com/embed/Y4cRx19nhJk" },
-      { subtitle: "6.2 Technical Essentials Every VA Should Know", list: [
-        "SSL Certificates: The 's' in 'https://'. It encrypts data between the user and the site. Without it, Google Chrome will flag the site as 'Not Secure'.",
-        "TLDs (Top Level Domains): .com is commercial, .org is organization, .edu is education. Choosing the right TLD impacts brand trust.",
-        "DNS Records: The phonebook of the internet. VAs often need to update 'A Records' or 'CNAMEs' to connect a domain to external tools."
-      ]},
-      { subtitle: "6.3 Essential CMS Platforms to Learn", list: [
-        `<a href="https://wordpress.org" target="_blank" class="${linkStyle}">WordPress</a>: Powers over 40% of the internet. Highly customizable but requires plugin maintenance.`,
-        `<a href="https://www.shopify.com" target="_blank" class="${linkStyle}">Shopify</a>: The industry standard for E-Commerce and physical product stores.`,
-        `<a href="https://www.wix.com" target="_blank" class="${linkStyle}">Wix</a> & Squarespace: Easier, drag-and-drop builders for quick local business sites.`,
-        `<a href="https://www.gohighlevel.com" target="_blank" class="${linkStyle}">GoHighLevel</a>: Preferred by agencies because the website builder natively connects to the sales CRM and automations.`
-      ]}
-    ]
-  },
-  {
-    id: 7, title: "Search Engine Optimization (SEO)", icon: Search, interactive: <SEOSimulator />,
-    content: [
-      { subtitle: "7.1 The Three Pillars of SEO", text: "SEO is how you convince Google that your website is the best answer to a user's question. It takes time but provides the highest ROI because organic traffic is free." },
-      { video: "https://www.youtube.com/embed/edkhm15FL3c" },
-      { subtitle: "7.2 Deep Dive: On-Page vs Off-Page vs Technical", list: [
-        "On-Page SEO: Everything you do ON your website. This includes writing high-quality content, placing Keywords in H1 and H2 Header tags, and ensuring images have descriptive Alt-Text.",
-        "Off-Page SEO: Everything that happens AWAY from your website. Primarily 'Backlinks'. If Forbes.com links to your website, Google sees that as a massive vote of confidence.",
-        "Technical SEO: Ensuring the site is fast, mobile-friendly, and has an XML Sitemap so Google's web crawlers can read it easily."
-      ]},
-      { subtitle: "7.3 Free SEO Tools Provided by the Industry", list: [
-        `<a href="https://ads.google.com/home/tools/keyword-planner/" target="_blank" class="${linkStyle}">Google Keyword Planner</a>: Directly from Google, shows search volume data.`,
-        `<a href="https://search.google.com/search-console/about" target="_blank" class="${linkStyle}">Google Search Console</a>: Connect this to client sites to see exactly what keywords they currently rank for.`,
-        `<a href="https://neilpatel.com/ubersuggest/" target="_blank" class="${linkStyle}">Ubersuggest</a>: A freemium tool excellent for competitor analysis.`
-      ]}
-    ]
-  },
-  {
-    id: 8, title: "CRM & GoHighLevel", icon: Users,
-    content: [
-      { subtitle: "8.1 The Power of a CRM", text: "A Customer Relationship Management (CRM) system is the brain of a business. It stops leads from falling through the cracks. It records every email sent, every phone call made, and every page visited by a prospective client." },
-      { video: "https://www.youtube.com/embed/y2-fP6LiIa8" },
-      { subtitle: "8.2 The Lead Lifecycle in a CRM", list: [
-        "Cold Lead: Has shown minimal interest, perhaps downloaded a free PDF.",
-        "Warm Lead: Has engaged multiple times, opens emails, visits the pricing page.",
-        "Hot Lead: Has requested a quote or booked a consultation. Needs immediate human outreach."
-      ]},
-      { subtitle: "8.3 Mastering GoHighLevel (GHL)", text: "GoHighLevel replaces the need for 10 different software subscriptions. It combines email marketing, SMS text campaigns, calendar bookings, and pipeline management." },
-      { video: "https://www.youtube.com/embed/MYE6T_gd7H0" },
-      { subtitle: "8.4 Pipelines and Stages", text: "In GHL, VAs build 'Pipelines' (a visual representation of the sales process). A lead moves from 'New Lead' -> 'Contacted' -> 'Appointment Booked' -> 'Closed Won'. VAs are responsible for keeping these clean." }
-    ]
-  },
-  {
-    id: 9, title: "System Integrations", icon: Layers,
-    content: [
-      { subtitle: "9.1 Automating the Business", text: "Integrations take a VA from being an 'assistant' to an 'automation engineer'. By connecting different apps, you eliminate hours of manual data entry, reducing human error to zero." },
-      { video: "https://www.youtube.com/embed/sQD7kaZ5h0s" },
-      { subtitle: "9.2 APIs vs Webhooks", list: [
-        "APIs (Application Programming Interfaces): Like a waiter asking the kitchen 'Is the food ready?'. Software A periodically asks Software B if there is new data. It requires polling.",
-        "Webhooks: Like the kitchen ringing a bell the exact second the food is ready. Software A instantly pushes data to Software B the moment an event occurs. Webhooks are faster."
-      ]},
-      { subtitle: "9.3 Building Workflows with Top Integration Tools", list: [
-        `<a href="https://zapier.com" target="_blank" class="${linkStyle}">Zapier</a>: The industry standard. Easy to learn with thousands of connections. Uses 'Triggers' and 'Actions'.`,
-        `<a href="https://www.make.com" target="_blank" class="${linkStyle}">Make (Integromat)</a>: More visual and slightly more complex, but allows for incredibly advanced, multi-branching automations at a lower cost.`
-      ]}
-    ]
-  },
-  {
-    id: 10, title: "Email Marketing", icon: Mail,
-    content: [
-      { subtitle: "10.1 The Value of an Email List", text: "Social media followers are 'rented' audiences; an algorithm change can hide your content tomorrow. An email list is an 'owned' asset. You have direct access to their inbox anytime you want." },
-      { video: "https://www.youtube.com/embed/uVWmh3ikMnA" },
-      { subtitle: "10.2 Advanced Email Strategies", list: [
-        "Segmentation: Never email everyone at once. Tag users based on behavior (e.g., 'Clicked shoe link', 'Bought hats'). Send specific emails based on those tags.",
-        "A/B Testing: Send Subject Line A to 10% of the list, and Subject Line B to another 10%. Whichever gets more opens automatically gets sent to the remaining 80%.",
-        "Deliverability & Spam Filters: Avoid ALL CAPS, excessive exclamation points, and trigger words like 'FREE MONEY' to ensure your email lands in the Primary inbox."
-      ]},
-      { subtitle: "10.3 Top Email Marketing Softwares", list: [
-        `<a href="https://mailchimp.com" target="_blank" class="${linkStyle}">Mailchimp</a>: Great for beginners and small e-commerce stores.`,
-        `<a href="https://convertkit.com" target="_blank" class="${linkStyle}">ConvertKit</a>: The best choice for creators, bloggers, and newsletter writers.`,
-        `<a href="https://www.gohighlevel.com" target="_blank" class="${linkStyle}">GoHighLevel</a>: Best for agencies and combining email with SMS.`
-      ]}
-    ]
-  },
-  {
-    id: 11, title: "Analytics and Performance", icon: BarChart,
-    content: [
-      { subtitle: "11.1 The Mathematics of Marketing", text: "A professional VA doesn't just post content; they report on what the content achieved. Understanding advanced analytics allows you to tell a client exactly how much money their marketing is making them." },
-      { subtitle: "11.2 Core Metrics Defined", list: [
-        "Views / Impressions: Total times an ad was displayed. High views mean good budget allocation and targeting.",
-        "Reach: Unique individuals who saw the ad. If Impressions are 10k and Reach is 2k, your audience is seeing the ad 5 times each (Frequency = 5).",
-        "Engagement Rate: (Likes + Comments + Shares) / Reach. A 3-5% engagement rate is considered very healthy. It proves the content is resonating.",
-        "CTR (Click-Through Rate): Clicks / Impressions. If 1,000 people see an ad and 100 click, the CTR is 10%. High CTR means your Hook and CTA are incredibly strong."
-      ]},
-      { subtitle: "11.3 Advanced Business Metrics", list: [
-        "CAC (Customer Acquisition Cost): Total marketing spend divided by new customers. If you spend $100 on ads and get 2 customers, your CAC is $50.",
-        "LTV (Lifetime Value): The total revenue a customer will spend with the business over years. If LTV is $500, a $50 CAC is highly profitable.",
-        "ROAS (Return on Ad Spend): If you spend $1 on ads and make $4 in sales, your ROAS is 4x."
-      ]}
-    ]
-  },
-  {
-    id: 12, title: "Advanced Applications", icon: TrendingUp,
-    content: [
-      { subtitle: "12.1 Strategic Campaign Development", list: [
-        "Phase 1: Market Research - Using tools to see what competitors are ranking for.",
-        "Phase 2: Strategy - Deciding the mix of Organic Content, Email Sequences, and Paid Ads.",
-        "Phase 3: Execution - The VA schedules the posts, sets up the GHL automations, and tests the webhooks.",
-        "Phase 4: Optimization - Looking at Analytics after 7 days to pause failing ads and double the budget on winning ads."
-      ]},
-      { subtitle: "12.2 Elite VA Professional Skills", text: "Beyond technical skills, elite VAs communicate proactively. They send clients Weekly End-of-Day (EOD) reports summarizing exactly what was done, what the metrics look like, and what the strategy is for next week. They solve problems before the client even realizes they exist." }
-    ]
-  },
-  {
-    id: 13, title: "Caption Writing Strategy", icon: Edit3, interactive: <CaptionSimulator />,
-    content: [
-      { subtitle: "13.1 The Anatomy of a High-Converting Caption", text: "A caption is micro-copywriting. It must immediately grab attention, retain it through storytelling or education, and direct the user to a specific action. Never write a caption that simply describes what is happening in the photo." },
-      { subtitle: "13.2 Deep Dive into the 4 Elements", list: [
-        "1. The Hook: The most critical part. It must disrupt the scroll. Use formatting (like ALL CAPS on one word, or an emoji) to draw the eye.",
-        "2. The Body: Format this for readability. Break up large blocks of text. Use line breaks. Keep sentences short and punchy.",
-        "3. The CTA: Only give ONE command. If you say 'Like, comment, share, and buy my course', the user will do nothing. Choose one: 'Comment YES to get the link'.",
-        "4. Hashtags: Place them at the very bottom, separated by space so they don't clutter the reading experience."
-      ]},
-      { subtitle: "13.3 Writing for Different Platforms", text: "LinkedIn requires professional, story-driven, text-heavy captions. Instagram relies on short, punchy, aesthetically formatted text. TikTok captions are very brief and prioritize keywords for the search algorithm." }
-    ]
-  },
-  {
-    id: 14, title: "Hashtag Strategy", icon: Hash,
-    content: [
-      { subtitle: "14.1 The Evolution of Hashtags", text: "In the past, hashtags were purely for discovery. Today, they act as SEO categorization tags for the platform's AI. They tell the algorithm exactly who to serve your content to on the 'Explore' or 'For You' pages." },
-      { subtitle: "14.2 The Ladder Strategy", list: [
-        "Volume Laddering: Don't just use massive tags like #Business (100M+ posts). Your post will be buried in seconds. Mix them with medium tags (100k-500k) and hyper-niche tags (10k-50k).",
-        "Location Tags: If managing a local business (e.g., a dentist in Chicago), #ChicagoDentist is infinitely more valuable than #TeethWhitening.",
-        "Brand Tags: Always include the client's custom tag (e.g., #Nike) so users can click it and see a gallery of all your branded content."
-      ]},
-      { subtitle: "14.3 Monitoring and Adjusting", text: "Use platform insights to see how many impressions came directly 'From Hashtags'. If that number drops over time, your current hashtag set is likely exhausted or shadowbanned. Rotate your sets weekly." }
-    ]
-  },
-  {
-    id: 15, title: "SEO for Virtual Assistants", icon: Target,
-    content: [
-      { subtitle: "15.1 VA Roles in SEO", text: "While you may not be a senior SEO engineer, a VA is heavily involved in the execution. You will be asked to upload blog posts, format headers, add internal links, and compress images so the site loads faster." },
-      { subtitle: "15.2 Critical On-Page SEO Checklist", list: [
-        "H1 Tag: Only ONE per page. It should contain the primary keyword.",
-        "H2/H3 Tags: Used to break up content logically. Google reads these to understand page structure.",
-        "Meta Description: This does not directly impact ranking, but a compelling meta description increases CTR on the Search Page, which Google DOES reward.",
-        "Internal Linking: Linking from your new blog post to an older blog post on your site. This passes 'link juice' and keeps users on the site longer."
-      ]},
-      { subtitle: "15.3 Image SEO Mastery", text: "Never upload an image named 'IMG_4092.jpg'. Rename it to 'digital-marketing-virtual-assistant.jpg' before uploading. Then, add descriptive Alt-Text describing the image for visually impaired users. Google's image search relies entirely on this data." }
-    ]
-  },
-  {
-    id: 16, title: "Using SEMrush", icon: Crosshair, interactive: <SEMrushSimulator />,
-    content: [
-      { subtitle: "16.1 The Industry Standard Tool", text: `The gold standard tool for all serious SEO research is <a href="https://www.semrush.com" target="_blank" class="${linkStyle}">SEMrush</a>. It is an enterprise-level platform used to spy on competitors, find lucrative keywords, and audit website health. Knowing how to navigate it makes a VA highly valuable.` },
-      { subtitle: "16.2 Core Workflows for VAs", list: [
-        "Keyword Magic Tool: Used to find long-tail keywords (e.g., 'best CRM for small digital marketing agencies') which have lower search volume but much higher intent to purchase.",
-        "Keyword Difficulty (KD): A metric from 1-100. If a client's website is brand new, a VA should filter out keywords with a KD over 30, as they are too competitive to rank for.",
-        "Site Audit: A tool that crawls the website and provides a list of errors (broken links, missing tags, slow pages). A VA can export this report and fix the errors systematically."
-      ]},
-      { subtitle: "16.3 Competitor Research", text: "You can plug a competitor's domain into SEMrush and instantly see exactly which keywords bring them the most traffic, and even view the exact Google Ads they are currently paying to run." }
-    ]
-  },
-  {
-    id: 17, title: "Sample Caption Frameworks", icon: FileText,
-    content: [
-      { subtitle: "17.1 Educational Framework (Value First)", list: [
-        "Hook: The biggest lie you've been told about SEO.",
-        "Body: Everyone says you need more backlinks. But if your on-page structure is broken, sending traffic to it is like pouring water into a leaky bucket. Focus on your H1s, internal linking, and load speed first.",
-        "CTA: Save this post to use as an audit checklist for your own website.",
-        "Hashtags: #SEOTips #WebsiteAudit #VirtualAssistant"
-      ]},
-      { subtitle: "17.2 Promotional Framework (Problem/Agitate/Solution)", list: [
-        "Hook: Are you spending 10 hours a week just answering emails?",
-        "Body: (Agitate) That is 40 hours a month you aren't spending on growing your business. It leads to burnout and missed opportunities. (Solution) Our certified VAs can take over your inbox, automate your CRM, and buy your time back.",
-        "CTA: Click the link in our bio to book a free discovery call and see how much time we can save you."
-      ]},
-      { subtitle: "17.3 Engagement Framework (Community Building)", list: [
-        "Hook: Unpopular opinion: TikTok is better for B2B than LinkedIn.",
-        "Body: We have seen massive shifts in where business owners consume content. The raw authenticity of video is converting faster than polished corporate posts.",
-        "CTA: Do you agree or disagree? Let's debate in the comments below."
-      ]}
-    ]
-  },
-  {
-    id: 18, title: "Course Outcomes & Next Steps", icon: CheckCircle,
-    content: [
-      { subtitle: "Comprehensive Learner Outcomes", text: "By completing this intensive training, you have transitioned from a general administrative assistant into a specialized Digital Marketing Virtual Assistant. You are now equipped to:", list: [
-        "Architect and execute multi-platform social media strategies that drive real engagement.",
-        "Engineer high-converting prompts for AI tools like ChatGPT and Gemini to scale content production.",
-        "Build, manage, and optimize complex CRM pipelines in GoHighLevel.",
-        "Automate business operations using Webhooks and Zapier.",
-        "Analyze complex data metrics (CAC, ROAS, CTR) and translate them into actionable business advice for clients."
-      ]},
-      { subtitle: "Next Steps for Career Growth", list: [
-        "Build a Portfolio: Create mock campaigns, graphics, and email sequences to prove your skills.",
-        "Master Cold Outreach: Use your new copywriting skills to pitch local businesses on how you can improve their SEO or manage their CRM.",
-        "Continuous Learning: Digital marketing changes weekly. Stay updated on algorithm shifts and new AI tools."
-      ]}
-    ]
-  }
-];
-
-export default function App() {
-  const [activeModuleId, setActiveModuleId] = useState(1);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const activeModule = COURSE_DATA.find(m => m.id === activeModuleId);
-  const progress = (activeModuleId / COURSE_DATA.length) * 100;
-
-  return (
-    <div className="flex h-screen bg-slate-50 font-sans text-slate-900 overflow-hidden selection:bg-slate-200 selection:text-slate-900">
-      
-      {/* Mobile Sidebar Overlay */}
-      {sidebarOpen && (
-        <div className="fixed inset-0 bg-slate-900/40 z-20 md:hidden backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
-      )}
-
-      {/* Sidebar Navigation */}
-      <aside className={`fixed md:static inset-y-0 left-0 w-80 bg-white border-r border-slate-200 text-slate-800 transform transition-transform duration-300 ease-in-out z-30 flex flex-col shadow-2xl md:shadow-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
-        
-        {/* Monochromatic Header */}
-        <div className="p-6 bg-slate-900 flex flex-col border-b border-slate-800 relative overflow-hidden">
-          <div className="flex justify-between items-center mt-2">
-            <div>
-              <h1 className="text-xl font-black leading-tight tracking-tight text-white flex items-center gap-2">
-                <LayoutDashboard className="w-5 h-5 text-slate-300"/> Digital Marketing
-              </h1>
-              <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase mt-1">For Virtual Assistants</p>
-            </div>
-            <button className="md:hidden text-slate-400 hover:text-white" onClick={() => setSidebarOpen(false)}>
-              <X className="w-6 h-6" />
-            </button>
-          </div>
-        </div>
-        
-        <div className="flex-1 overflow-y-auto py-6 custom-scrollbar bg-slate-50">
-          <div className="px-6 mb-6">
-            <div className="flex justify-between text-xs font-bold text-slate-500 mb-2 uppercase tracking-wider">
-              <span>Course Progress</span>
-              <span className="text-slate-800">{Math.round(progress)}%</span>
-            </div>
-            <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden shadow-inner">
-              <div className="h-2.5 rounded-full transition-all duration-700 bg-slate-800" style={{ width: `${progress}%` }}></div>
-            </div>
-          </div>
-
-          <ul className="space-y-1.5 px-4">
-            {COURSE_DATA.map((mod) => {
-              const Icon = mod.icon;
-              const isActive = activeModuleId === mod.id;
-              return (
-                <li key={mod.id}>
-                  <button
-                    onClick={() => { setActiveModuleId(mod.id); setSidebarOpen(false); }}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-left border ${isActive ? 'bg-white text-slate-900 font-bold border-slate-200 shadow-sm border-l-4 border-l-slate-900' : 'bg-transparent text-slate-600 border-transparent hover:bg-slate-200 hover:text-slate-900 font-semibold'}`}
-                  >
-                    <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-slate-900' : 'text-slate-400'}`} />
-                    <span className="text-sm leading-tight line-clamp-2">
-                      <span className={`opacity-70 mr-1.5 ${isActive ? 'text-slate-900' : ''}`}>{mod.id}.</span> 
-                      {mod.title}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </aside>
-
-      {/* Main Content Area */}
-      <main className="flex-1 flex flex-col h-full bg-white relative overflow-hidden z-10">
-        
-        {/* Top Header */}
-        <header className="flex items-center gap-4 p-5 md:p-8 border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-10">
-          <button className="md:hidden p-2.5 rounded-lg bg-slate-50 text-slate-600 border border-slate-200 hover:bg-slate-100" onClick={() => setSidebarOpen(true)}>
-            <Menu className="w-5 h-5" />
-          </button>
-          <div>
-            <span className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5 block">Module {activeModule.id}</span>
-            <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{activeModule.title}</h2>
-          </div>
-        </header>
-
-        {/* Content Scroll Area */}
-        <div className="flex-1 overflow-y-auto p-5 md:p-10 custom-scrollbar pb-32 bg-white">
-          <div className="max-w-4xl mx-auto space-y-12">
-            
-            {activeModule.content.map((section, idx) => (
-              <div key={idx} className="space-y-5 relative">
-                
-                {/* Render Text Content */}
-                {section.subtitle && (
-                  <h3 className="text-xl md:text-2xl font-extrabold text-slate-800 border-b-2 border-slate-100 pb-3 inline-block">
-                    {section.subtitle}
-                  </h3>
-                )}
-                
-                {section.text && (
-                  <p 
-                    className="text-slate-700 leading-relaxed text-base font-medium"
-                    dangerouslySetInnerHTML={{__html: section.text}}
-                  />
-                )}
-                
-                {section.list && (
-                  <ul className="space-y-3.5 mt-4">
-                    {section.list.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800 text-base font-medium shadow-sm hover:shadow-md transition-shadow">
-                        <ChevronRight className="w-5 h-5 text-slate-900 flex-shrink-0 mt-0.5" />
-                        <span dangerouslySetInnerHTML={{__html: item.replace(/^([^:]+):/, '<strong class="font-black text-slate-900">$1:</strong>')}} />
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {/* Render Interactive Element embedded within the loop if passed here */}
-                {section.interactive && (
-                  <div className="mt-6">
-                    {section.interactive}
-                  </div>
-                )}
-
-                {/* Render Video Iframe */}
-                {section.video && (
-                  <div className="my-8 rounded-2xl overflow-hidden border border-slate-300 shadow-sm bg-slate-100 aspect-video relative">
-                     <iframe 
-                        src={section.video.split('?')[0]} 
-                        title={`Video for ${activeModule.title}`} 
-                        className="absolute inset-0 w-full h-full"
-                        frameBorder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        allowFullScreen>
-                     </iframe>
-                  </div>
-                )}
-
-              </div>
-            ))}
-
-            {/* Render Module-Level Interactive Element if it exists */}
-            {activeModule.interactive && !activeModule.content.some(c => c.interactive) && (
-              <div className="mt-12 pt-8 border-t border-slate-200">
-                {activeModule.interactive}
-              </div>
-            )}
-
-            {/* Navigation Buttons */}
-            <div className="flex justify-between items-center pt-12 mt-16 border-t border-slate-200">
-              <button 
-                onClick={() => setActiveModuleId(Math.max(1, activeModuleId - 1))}
-                disabled={activeModuleId === 1}
-                className="px-6 py-3 rounded-xl border-2 border-slate-300 text-slate-700 font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:border-slate-900 hover:text-slate-900 transition-colors text-sm"
-              >
-                Previous Module
-              </button>
-              <button 
-                onClick={() => setActiveModuleId(Math.min(COURSE_DATA.length, activeModuleId + 1))}
-                disabled={activeModuleId === COURSE_DATA.length}
-                className="px-6 py-3 rounded-xl bg-slate-900 text-white font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black transition-colors flex items-center gap-2 text-sm shadow-md"
-              >
-                Next Module <Play className="w-4 h-4 fill-current" />
-              </button>
-            </div>
-
-          </div>
-        </div>
-      </main>
-
-      {/* Global CSS for scrollbars */}
-      <style dangerouslySetInnerHTML={{__html: `
+    <style>
         .custom-scrollbar::-webkit-scrollbar {
           width: 8px;
         }
@@ -790,7 +33,796 @@ export default function App() {
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background-color: #475569;
         }
-      `}} />
-    </div>
-  );
-}
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-900 overflow-hidden selection:bg-slate-200 selection:text-slate-900">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // --- INTERACTIVE COMPONENTS (MONOCHROMATIC BRANDING) ---
+
+        const BrandIdentityViewer = () => {
+          const [activeColor, setActiveColor] = useState('#000000');
+          const [activeFont, setActiveFont] = useState('font-sans');
+
+          const colors = [
+            { hex: '#000000', name: 'Primary (Black)', desc: 'Authority, Elegance' },
+            { hex: '#475569', name: 'Secondary (Slate)', desc: 'Professionalism, Depth' },
+            { hex: '#94A3B8', name: 'Accent (Gray)', desc: 'Modern, Minimal' },
+            { hex: '#FFFFFF', name: 'Neutral (White)', desc: 'Clarity, Simplicity' },
+          ];
+
+          return (
+            <div className="bg-white p-6 rounded-xl border border-slate-300 my-6 shadow-sm">
+              <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
+                <i className="fa-solid fa-pen-nib w-5 h-5 text-slate-700 flex items-center justify-center"></i> 
+                Interactive: Monochromatic Palette Tester
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
+                <div>
+                  <p className="text-sm font-bold text-slate-700 mb-2">Select Primary Color</p>
+                  <div className="flex flex-wrap gap-3 mb-6">
+                    {colors.map(c => (
+                      <button 
+                        key={c.hex} 
+                        onClick={() => setActiveColor(c.hex)}
+                        className={`w-12 h-12 rounded-full border-4 shadow-sm transition-transform ${activeColor === c.hex ? 'border-slate-800 scale-110' : 'border-slate-200 hover:scale-105'}`}
+                        style={{ backgroundColor: c.hex }}
+                        title={c.name}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-sm font-bold text-slate-700 mb-2">Select Typography</p>
+                  <div className="flex gap-2">
+                    <button onClick={() => setActiveFont('font-sans')} className={`px-4 py-2 rounded-lg font-bold transition-colors border ${activeFont === 'font-sans' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}`}>Sans-serif (Modern)</button>
+                    <button onClick={() => setActiveFont('font-serif')} className={`px-4 py-2 rounded-lg font-bold transition-colors border ${activeFont === 'font-serif' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}`}>Serif (Traditional)</button>
+                  </div>
+                </div>
+                <div 
+                  className={`p-6 rounded-xl border border-slate-200 flex flex-col justify-center items-center text-center transition-all duration-300 ${activeFont}`}
+                  style={{ backgroundColor: activeColor, color: activeColor === '#FFFFFF' ? '#000000' : '#FFFFFF' }}
+                >
+                  <h1 className="text-3xl font-extrabold mb-3">Sample Headline</h1>
+                  <p className="text-sm font-medium leading-relaxed opacity-90">This illustrates how your selected typography renders against a monochromatic brand color. High contrast is vital for readability.</p>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        const AIPromptBuilder = () => {
+          const [subject, setSubject] = useState('professional working on a laptop');
+          const [style, setStyle] = useState('documentary style');
+          const [lighting, setLighting] = useState('natural lighting');
+
+          return (
+            <div className="bg-slate-50 p-6 rounded-xl border border-slate-300 shadow-sm my-6">
+              <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-200 pb-3">
+                <i className="fa-solid fa-microchip w-5 h-5 text-slate-700 flex items-center justify-center"></i> 
+                Interactive: AI Image Prompt Builder
+              </h4>
+              <div className="space-y-4 pt-2">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1">Subject</label>
+                    <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} className="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow bg-white" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1">Style</label>
+                    <select value={style} onChange={(e) => setStyle(e.target.value)} className="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow bg-white">
+                      <option>documentary style</option>
+                      <option>hyper-realistic</option>
+                      <option>black and white photography</option>
+                      <option>cinematic grayscale</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1">Lighting</label>
+                    <select value={lighting} onChange={(e) => setLighting(e.target.value)} className="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow bg-white">
+                      <option>natural lighting</option>
+                      <option>harsh studio lighting</option>
+                      <option>soft moody shadows</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                  <p className="text-xs font-extrabold text-slate-900 mb-1 uppercase tracking-wider">Generated Prompt:</p>
+                  <p className="text-slate-700 font-mono text-sm leading-relaxed">
+                    "A high quality image of a {subject}, {lighting}, soft shadows, {style}, slightly off-center composition, 8k resolution, highly detailed."
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        const AIComparisonTable = () => {
+          return (
+            <div className="bg-white border border-slate-300 rounded-xl overflow-hidden my-6 shadow-sm">
+              <div className="bg-slate-100 px-6 py-4 border-b border-slate-300 flex items-center gap-3">
+                <div className="p-2 bg-slate-200 rounded-lg">
+                    <i className="fa-solid fa-layer-group w-5 h-5 text-slate-800 flex items-center justify-center"></i>
+                </div>
+                <h4 className="font-bold text-slate-900">AI Tool Comparison Matrix</h4>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm">
+                  <thead className="bg-white border-b border-slate-200 text-slate-600">
+                    <tr>
+                      <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">AI Model</th>
+                      <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">Best Used For</th>
+                      <th className="px-6 py-4 font-bold uppercase text-xs tracking-wider">Key Strengths & Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    <tr className="hover:bg-slate-50 transition-colors">
+                      <td className="px-6 py-4">
+                        <a href="https://chat.openai.com" target="_blank" rel="noreferrer" className="font-extrabold text-slate-900 underline decoration-slate-400 hover:decoration-slate-900">ChatGPT</a>
+                      </td>
+                      <td className="px-6 py-4 text-slate-800 font-bold">Copywriting & Abstract Images</td>
+                      <td className="px-6 py-4 text-slate-600">Excellent at structuring text, adapting to different conversational tones, and using DALL-E for creative visual generation.</td>
+                    </tr>
+                    <tr className="hover:bg-slate-50 transition-colors">
+                      <td className="px-6 py-4">
+                        <a href="https://claude.ai" target="_blank" rel="noreferrer" className="font-extrabold text-slate-900 underline decoration-slate-400 hover:decoration-slate-900">Claude</a>
+                      </td>
+                      <td className="px-6 py-4 text-slate-800 font-bold">Copywriting & Coding</td>
+                      <td className="px-6 py-4 text-slate-600">Produces highly nuanced, "human-like" text with great flow. Exceptional at understanding complex logic and debugging.</td>
+                    </tr>
+                    <tr className="hover:bg-slate-50 transition-colors">
+                      <td className="px-6 py-4">
+                        <a href="https://gemini.google.com" target="_blank" rel="noreferrer" className="font-extrabold text-slate-900 underline decoration-slate-400 hover:decoration-slate-900">Gemini</a>
+                      </td>
+                      <td className="px-6 py-4 text-slate-800 font-bold">Hyper-Realistic Images</td>
+                      <td className="px-6 py-4 text-slate-600">Unmatched at generating hyper-realistic, photographic images. Highly capable at Google Workspace integration.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          );
+        };
+
+        const SEOSimulator = () => {
+          return (
+            <div className="bg-slate-50 border border-slate-300 rounded-xl p-6 my-6 shadow-sm">
+              <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-200 pb-3">
+                <i className="fa-solid fa-globe w-5 h-5 text-slate-700 flex items-center justify-center"></i> 
+                Interactive: Mock Search Engine Results Page (SERP)
+              </h4>
+              <p className="text-sm text-slate-600 mb-6 pt-2">This illustrates the visual difference between Paid Search (Ads) and Organic Search (SEO).</p>
+              
+              <div className="bg-white border-2 border-slate-300 rounded-full px-5 py-3 mb-8 flex items-center gap-3 max-w-xl shadow-sm">
+                <i className="fa-solid fa-magnifying-glass w-5 h-5 text-slate-500 flex items-center justify-center"></i>
+                <span className="text-sm font-bold text-slate-800">virtual assistant for digital marketing</span>
+              </div>
+
+              {/* Sponsored Result */}
+              <div className="mb-8 pb-8 border-b border-slate-200">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-[11px] font-bold bg-slate-200 text-slate-800 px-2 py-0.5 rounded uppercase tracking-wider border border-slate-300">Sponsored</span>
+                  <span className="text-xs text-slate-500 font-mono font-semibold">www.elite-va-agency.com</span>
+                </div>
+                <h3 className="text-xl font-extrabold text-slate-900 underline decoration-slate-400 cursor-pointer hover:decoration-slate-900">Hire Top Digital Marketing VAs - Start Today</h3>
+                <p className="text-sm text-slate-700 mt-2 leading-relaxed font-medium">Scale your business instantly with our pre-vetted marketing virtual assistants. We handle social media, copywriting, and SEO. Book a discovery call today.</p>
+              </div>
+
+              {/* Organic Result 1 */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs text-slate-500 font-mono font-semibold">www.business-growth-blog.com/seo</span>
+                </div>
+                <h3 className="text-xl font-extrabold text-slate-900 underline decoration-slate-400 cursor-pointer hover:decoration-slate-900">10 Reasons Why You Need a Digital Marketing VA</h3>
+                <p className="text-sm text-slate-700 mt-2 leading-relaxed font-medium">A digital marketing virtual assistant can help you manage your digital presence, schedule posts, optimize for SEO, and reply to your audience to increase engagement...</p>
+              </div>
+              
+              {/* Organic Result 2 */}
+              <div className="mb-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs text-slate-500 font-mono font-semibold">www.freelance-tips.org/virtual-assistant</span>
+                </div>
+                <h3 className="text-xl font-extrabold text-slate-900 underline decoration-slate-400 cursor-pointer hover:decoration-slate-900">How to Become a Certified Social Media Manager</h3>
+                <p className="text-sm text-slate-700 mt-2 leading-relaxed font-medium">Learn the skills needed to offer professional social media and digital marketing services to clients. A comprehensive guide on tools, strategies, and client outreach...</p>
+              </div>
+            </div>
+          );
+        };
+
+        const CaptionSimulator = () => {
+          const [hook, setHook] = useState('Your content can look good and still fail to perform.');
+          const [body, setBody] = useState('A strong visual is only one part of digital marketing. If your caption does not guide the reader, build interest, or provide a next step, your post may get attention but not results.');
+          const [cta, setCta] = useState('Review your last 3 captions and check if they tell the audience what to do next.');
+          const [hashtags, setHashtags] = useState('#DigitalMarketing #VirtualAssistant');
+
+          return (
+            <div className="bg-white border border-slate-300 p-6 rounded-xl my-6 flex flex-col md:flex-row gap-8 shadow-sm">
+              <div className="flex-1 space-y-4">
+                <h4 className="text-lg font-bold flex items-center gap-2 text-slate-900 border-b border-slate-200 pb-3">
+                  <div className="p-1.5 bg-slate-100 border border-slate-200 rounded-md">
+                    <i className="fa-solid fa-pen-to-square w-5 h-5 text-slate-800 flex items-center justify-center"></i>
+                  </div>
+                  Caption Builder Simulator
+                </h4>
+                <div className="pt-2">
+                  <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1 tracking-wider">1. Hook (Catches attention)</label>
+                  <input type="text" value={hook} onChange={e=>setHook(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow" />
+                </div>
+                <div>
+                  <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1 tracking-wider">2. Body (Provides context)</label>
+                  <textarea value={body} onChange={e=>setBody(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm h-28 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow" />
+                </div>
+                <div>
+                  <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1 tracking-wider">3. Call To Action (CTA)</label>
+                  <input type="text" value={cta} onChange={e=>setCta(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow" />
+                </div>
+                <div>
+                  <label className="block text-xs font-extrabold text-slate-600 uppercase mb-1 tracking-wider">4. Hashtags</label>
+                  <input type="text" value={hashtags} onChange={e=>setHashtags(e.target.value)} className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm text-slate-800 font-mono focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow" />
+                </div>
+              </div>
+              
+              {/* Smartphone Preview */}
+              <div className="w-full md:w-72 bg-white text-slate-900 rounded-[2.5rem] border-[10px] border-slate-900 overflow-hidden shadow-2xl flex flex-col relative">
+                <div className="absolute top-0 inset-x-0 h-5 bg-slate-900 rounded-b-2xl w-36 mx-auto z-10"></div>
+                <div className="h-56 bg-slate-100 flex flex-col items-center justify-center border-b border-slate-200 relative overflow-hidden">
+                   <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-400 via-transparent to-transparent"></div>
+                  <span className="text-slate-500 text-sm font-extrabold tracking-widest uppercase relative z-10">[ Visual Art ]</span>
+                </div>
+                <div className="p-5 flex-1 overflow-y-auto text-[13px] custom-scrollbar">
+                  <p className="font-extrabold mb-2 text-slate-900">brand_name</p>
+                  <p className="font-bold mb-2 text-slate-900">{hook}</p>
+                  <p className="text-slate-700 mb-3 whitespace-pre-wrap leading-relaxed">{body}</p>
+                  <p className="font-bold mb-3 text-slate-900">{cta}</p>
+                  <p className="text-slate-600 font-mono text-xs font-semibold">{hashtags}</p>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        const SEMrushSimulator = () => {
+          const [query, setQuery] = useState('');
+          const [results, setResults] = useState(null);
+
+          const mockDb = {
+            'social media': [
+              { keyword: 'social media management', vol: '14,000', kd: 45, intent: 'Commercial' },
+              { keyword: 'social media manager vs virtual assistant', vol: '1,200', kd: 22, intent: 'Informational' },
+              { keyword: 'social media tools', vol: '8,100', kd: 55, intent: 'Transactional' },
+            ],
+            'virtual assistant': [
+              { keyword: 'virtual assistant services', vol: '22,000', kd: 60, intent: 'Commercial' },
+              { keyword: 'how to become a virtual assistant', vol: '18,000', kd: 40, intent: 'Informational' },
+              { keyword: 'digital marketing virtual assistant', vol: '3,600', kd: 35, intent: 'Commercial' },
+            ]
+          };
+
+          const handleSearch = () => {
+            const key = query.toLowerCase();
+            if (key.includes('social')) setResults(mockDb['social media']);
+            else if (key.includes('virtual')) setResults(mockDb['virtual assistant']);
+            else setResults([{ keyword: `${query} for beginners`, vol: '450', kd: 15, intent: 'Informational' }]);
+          };
+
+          return (
+            <div className="bg-white border border-slate-300 shadow-sm rounded-xl p-6 my-6">
+              <div className="flex items-center gap-3 mb-6 border-b border-slate-200 pb-4">
+                <div className="bg-slate-900 p-2.5 rounded-lg">
+                    <i className="fa-solid fa-magnifying-glass w-5 h-5 text-white flex items-center justify-center"></i>
+                </div>
+                <h4 className="text-lg font-bold text-slate-900">SEMrush Mock Keyword Tool</h4>
+              </div>
+              
+              <div className="flex gap-2 mb-6">
+                <input 
+                  type="text" 
+                  placeholder="Try 'social media' or 'virtual assistant'..."
+                  className="flex-1 border border-slate-300 rounded-lg px-4 py-2.5 text-sm focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition-shadow bg-slate-50"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+                <button onClick={handleSearch} className="bg-slate-900 hover:bg-black text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-colors shadow-sm">
+                  Analyze
+                </button>
+              </div>
+
+              {results && (
+                <div className="overflow-x-auto rounded-lg border border-slate-200">
+                  <table className="w-full text-sm text-left">
+                    <thead className="bg-slate-100 text-slate-700 text-xs uppercase tracking-wider">
+                      <tr>
+                        <th className="px-5 py-4 font-extrabold">Keyword</th>
+                        <th className="px-5 py-4 font-extrabold">Intent</th>
+                        <th className="px-5 py-4 font-extrabold">Volume (Mo.)</th>
+                        <th className="px-5 py-4 font-extrabold">KD % (Difficulty)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-200 bg-white">
+                      {results.map((res, idx) => (
+                        <tr key={idx} className="hover:bg-slate-50 transition-colors">
+                          <td className="px-5 py-4 font-bold text-slate-900">{res.keyword}</td>
+                          <td className="px-5 py-4">
+                            <span className={`px-2.5 py-1 rounded-md text-[11px] font-extrabold tracking-wide border ${res.intent === 'Informational' ? 'bg-slate-100 text-slate-600 border-slate-300' : 'bg-slate-800 text-white border-slate-900'}`}>
+                              {res.intent}
+                            </span>
+                          </td>
+                          <td className="px-5 py-4 font-mono font-bold text-slate-700">{res.vol}</td>
+                          <td className="px-5 py-4">
+                            <div className="flex items-center gap-3">
+                              <div className="w-full bg-slate-200 rounded-full h-2.5 max-w-[80px] overflow-hidden">
+                                <div className={`h-2.5 rounded-full ${res.kd > 50 ? 'bg-slate-800' : res.kd > 30 ? 'bg-slate-500' : 'bg-slate-300'}`} style={{width: `${res.kd}%`}}></div>
+                              </div>
+                              <span className="text-xs font-extrabold text-slate-900">{res.kd}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          );
+        };
+
+        // --- LINK HELPER ---
+        const linkStyle = "text-slate-900 underline decoration-slate-400 hover:decoration-slate-900 font-bold transition-colors";
+
+        // --- COURSE DATA ---
+        const COURSE_DATA = [
+          {
+            id: 1, title: "Principles of Marketing & Course Setup", icon: "fa-book-open",
+            content: [
+              { subtitle: "1.1 How to Use This Course (Best Practices)", text: "This course is highly interactive and practical. For the best learning experience, we highly recommend a <strong>split-screen setup</strong>. <br/><br/>If you have dual monitors, keep this course open on one screen and the software (like Canva, SEMrush, or GoHighLevel) open on the other. If you are using a single monitor, split your browser windows side-by-side or use dual tabs. Do not just read—open the tools and follow along as you go." },
+              { subtitle: "1.2 Definition & Philosophy", text: "Marketing is far more than just advertising. It is the structured process of identifying human or business needs, engineering a solution that provides genuine value, and effectively communicating that value to facilitate a transaction. It relies heavily on psychology and market research to understand what the consumer truly desires before a product is even made." },
+              { subtitle: "1.3 Inbound vs Outbound Marketing", list: [
+                "Inbound Marketing: Magnetizing customers to your business by creating valuable content (Blogs, SEO, Social Media) that answers their questions.",
+                "Outbound Marketing: Pushing your message out to a broad audience, hoping to catch potential customers (Cold calling, TV ads, Billboards)."
+              ]},
+              { subtitle: "1.4 The Advanced Marketing Funnel", list: [
+                "Top of Funnel (TOFU) - Awareness: The user has a problem but doesn't know the solution. Your goal is education.",
+                "Middle of Funnel (MOFU) - Consideration: The user knows the solutions available and is comparing options. Your goal is building trust.",
+                "Bottom of Funnel (BOFU) - Conversion: The user is ready to buy. Your goal is removing friction and providing a strong Call-to-Action (CTA).",
+                "Retention & Advocacy: Marketing doesn't stop at the sale. Keeping the customer happy so they refer others is the most profitable phase."
+              ]}
+            ]
+          },
+          {
+            id: 2, title: "Digital Marketing", icon: "fa-globe",
+            content: [
+              { subtitle: "2.1 The Digital Landscape", text: "Digital marketing encompasses all marketing efforts that use an electronic device or the internet. Unlike traditional marketing, digital marketing allows for precise targeting and real-time tracking, meaning a business can see exactly how many people clicked an ad and whether or not it resulted in a sale." },
+              { video: "https://www.youtube.com/embed/bixR-KIJKYM" },
+              { subtitle: "2.2 B2B vs B2C Digital Marketing", list: [
+                "B2B (Business to Business): Focuses on logic, ROI, and long decision-making cycles. LinkedIn and Email Marketing dominate here.",
+                "B2C (Business to Consumer): Focuses on emotion, quick decisions, and entertainment. Platforms like Instagram, TikTok, and Facebook are critical."
+              ]},
+              { subtitle: "2.3 The Digital Marketing Ecosystem", list: [
+                "Paid Media: Anything you pay for (Google Ads, Facebook Ads, Sponsored Content).",
+                "Owned Media: Assets you control completely (Your Website, Your Email List, Your Blog).",
+                "Earned Media: When others talk about you for free (Customer Reviews, PR mentions, Viral shares)."
+              ]}
+            ]
+          },
+          {
+            id: 3, title: "Social Media Management", icon: "fa-share-nodes",
+            content: [
+              { subtitle: "3.1 Understanding Social Algorithms", text: "A Social Media Manager must understand that platforms do not show your posts to all your followers. Algorithms dictate visibility based on 'Signals' like watch time, saves, and comments. The algorithm's only goal is to keep users on the app longer; if your content does that, you will be rewarded with reach." },
+              { video: "https://www.youtube.com/embed/U0keUj6EoDM" },
+              { video: "https://www.youtube.com/embed/q4OWKoUUjdY" },
+              { subtitle: "3.2 Content Pillars & Strategy", text: "Content shouldn't be random. A Virtual Assistant should develop 3 to 5 'Content Pillars' for a brand. For example, a fitness brand's pillars might be: 1) Workout Tutorials, 2) Nutrition Myths, 3) Client Success Stories, and 4) Behind-the-Scenes. This ensures a consistent brand voice." },
+              { subtitle: "3.3 Community Management", list: [
+                "Proactive Engagement: Leaving thoughtful comments on target audience accounts before they even follow you.",
+                "Reactive Engagement: Replying to DMs and comments quickly. This trains the algorithm that your account is highly active.",
+                "Crisis Management: Knowing how to professionally respond to a negative review or angry customer publicly."
+              ]}
+            ]
+          },
+          {
+            id: 4, title: "Graphic Design for Marketing", icon: "fa-pen-nib", interactive: <BrandIdentityViewer />,
+            content: [
+              { subtitle: "4.1 The Psychology of Design", text: "Graphic design in marketing is not about making things 'pretty'; it is about directing the viewer's eye. Good design reduces cognitive load, meaning the customer understands your offer instantly without having to think." },
+              { subtitle: "4.2 Deep Dive into Design Principles", list: [
+                "Visual Hierarchy: The most important element (like the Hook or the Sale Price) should be the largest and boldest.",
+                "Negative Space: Also known as white space. Clutter confuses buyers. Giving text room to breathe increases readability and perceived luxury.",
+                "The Rule of Thirds: Dividing an image into a 3x3 grid and placing the focal point on the intersecting lines makes the graphic more dynamic."
+              ]},
+              { subtitle: "4.3 Core Brand Colors", text: "Selecting brand colors requires an understanding of psychology. A medical business might use Blue for trust. A fast-food chain uses Red and Yellow to trigger urgency and hunger. Stick to 1 Primary color, 1 Secondary, and 2 Neutrals." },
+              { subtitle: "4.4 Understanding Hex Codes", text: "A <strong>Hex Code</strong> is a 6-symbol code (composed of numbers and letters) used in digital design to represent a specific, exact color. It always begins with a hashtag (#). For example, #000000 is pure black, and #FFFFFF is pure white. As a VA, you will copy and paste these Hex Codes into tools like Canva, GoHighLevel, or WordPress to guarantee brand consistency across every single post and web page." },
+              { subtitle: "4.5 Essential Design Tools", list: [
+                `Free / Browser-Based: <a href="https://www.canva.com" target="_blank" class="${linkStyle}">Canva</a> (Best for quick templates), <a href="https://www.figma.com" target="_blank" class="${linkStyle}">Figma</a> (Best for UI/Layouts), <a href="https://www.photopea.com" target="_blank" class="${linkStyle}">Photopea</a> (Free Photoshop clone)`,
+                `Advanced / Professional: <a href="https://www.adobe.com/products/photoshop.html" target="_blank" class="${linkStyle}">Adobe Photoshop</a>, <a href="https://www.adobe.com/products/illustrator.html" target="_blank" class="${linkStyle}">Adobe Illustrator</a>`
+              ]}
+            ]
+          },
+          {
+            id: 5, title: "Artificial Intelligence in Marketing", icon: "fa-microchip", interactive: <AIPromptBuilder />,
+            content: [
+              { subtitle: "5.1 The Role of an AI-Enhanced VA", text: "Artificial Intelligence will not replace Virtual Assistants; Virtual Assistants who use AI will replace those who do not. AI is a multiplier. It allows you to write 10 caption drafts in seconds, generate stock-quality images without a budget, and analyze spreadsheets of data instantly." },
+              { subtitle: "5.2 Advanced Copywriting with AI", text: "The biggest mistake beginners make is asking AI to 'write a post about SEO' and pasting the result. This sounds robotic. Instead, use 'Few-Shot Prompting': Give the AI 3 examples of your client's past successful posts, and then ask it to write a new one matching that exact tone.", list: [
+                `<a href="https://chatgpt.com" target="_blank" class="${linkStyle}">ChatGPT</a>: Excellent for brainstorming, outlining, and formatting data tables.`,
+                `<a href="https://claude.ai" target="_blank" class="${linkStyle}">Claude</a>: Superior for long-form writing; it naturally avoids cringey AI buzzwords like 'Delve' or 'Tapestry'.`
+              ]},
+              { subtitle: "5.3 Image Generation Mastery", text: "When prompting for images, you must act like a film director. Specify the camera angle, the lighting, the subject, and the lens.", list: [
+                `<a href="https://gemini.google.com" target="_blank" class="${linkStyle}">Gemini</a>: Highly recommended for hyper-realistic images and maintaining accurate human anatomy.`,
+                `<a href="https://www.midjourney.com" target="_blank" class="${linkStyle}">Midjourney</a> & DALL-E: Great for artistic, abstract, or highly stylized conceptual art.`
+              ]},
+              { subtitle: "5.4 Tool Comparison Matrix", text: "Understanding which AI tool to deploy for which specific VA task is crucial for efficiency.", interactive: <AIComparisonTable /> }
+            ]
+          },
+          {
+            id: 6, title: "Websites and Domains", icon: "fa-desktop",
+            content: [
+              { subtitle: "6.1 Anatomy of the Web", text: "A website is your digital real estate. A Domain (like yourbusiness.com) is the street address. Hosting is the plot of land you rent to build the house on. Without all three, a website cannot exist on the internet." },
+              { video: "https://www.youtube.com/embed/Y4cRx19nhJk" },
+              { subtitle: "6.2 Technical Essentials Every VA Should Know", list: [
+                "SSL Certificates: The 's' in 'https://'. It encrypts data between the user and the site. Without it, Google Chrome will flag the site as 'Not Secure'.",
+                "TLDs (Top Level Domains): .com is commercial, .org is organization, .edu is education. Choosing the right TLD impacts brand trust.",
+                "DNS Records: The phonebook of the internet. VAs often need to update 'A Records' or 'CNAMEs' to connect a domain to external tools."
+              ]},
+              { subtitle: "6.3 Essential CMS Platforms to Learn", list: [
+                `<a href="https://wordpress.org" target="_blank" class="${linkStyle}">WordPress</a>: Powers over 40% of the internet. Highly customizable but requires plugin maintenance.`,
+                `<a href="https://www.shopify.com" target="_blank" class="${linkStyle}">Shopify</a>: The industry standard for E-Commerce and physical product stores.`,
+                `<a href="https://www.wix.com" target="_blank" class="${linkStyle}">Wix</a> & Squarespace: Easier, drag-and-drop builders for quick local business sites.`,
+                `<a href="https://www.gohighlevel.com" target="_blank" class="${linkStyle}">GoHighLevel</a>: Preferred by agencies because the website builder natively connects to the sales CRM and automations.`
+              ]}
+            ]
+          },
+          {
+            id: 7, title: "Search Engine Optimization (SEO)", icon: "fa-magnifying-glass", interactive: <SEOSimulator />,
+            content: [
+              { subtitle: "7.1 The Three Pillars of SEO", text: "SEO is how you convince Google that your website is the best answer to a user's question. It takes time but provides the highest ROI because organic traffic is free." },
+              { video: "https://www.youtube.com/embed/edkhm15FL3c" },
+              { subtitle: "7.2 Deep Dive: On-Page vs Off-Page vs Technical", list: [
+                "On-Page SEO: Everything you do ON your website. This includes writing high-quality content, placing Keywords in H1 and H2 Header tags, and ensuring images have descriptive Alt-Text.",
+                "Off-Page SEO: Everything that happens AWAY from your website. Primarily 'Backlinks'. If Forbes.com links to your website, Google sees that as a massive vote of confidence.",
+                "Technical SEO: Ensuring the site is fast, mobile-friendly, and has an XML Sitemap so Google's web crawlers can read it easily."
+              ]},
+              { subtitle: "7.3 Free SEO Tools Provided by the Industry", list: [
+                `<a href="https://ads.google.com/home/tools/keyword-planner/" target="_blank" class="${linkStyle}">Google Keyword Planner</a>: Directly from Google, shows search volume data.`,
+                `<a href="https://search.google.com/search-console/about" target="_blank" class="${linkStyle}">Google Search Console</a>: Connect this to client sites to see exactly what keywords they currently rank for.`,
+                `<a href="https://neilpatel.com/ubersuggest/" target="_blank" class="${linkStyle}">Ubersuggest</a>: A freemium tool excellent for competitor analysis.`
+              ]}
+            ]
+          },
+          {
+            id: 8, title: "CRM & GoHighLevel", icon: "fa-users",
+            content: [
+              { subtitle: "8.1 The Power of a CRM", text: "A Customer Relationship Management (CRM) system is the brain of a business. It stops leads from falling through the cracks. It records every email sent, every phone call made, and every page visited by a prospective client." },
+              { video: "https://www.youtube.com/embed/y2-fP6LiIa8" },
+              { subtitle: "8.2 The Lead Lifecycle in a CRM", list: [
+                "Cold Lead: Has shown minimal interest, perhaps downloaded a free PDF.",
+                "Warm Lead: Has engaged multiple times, opens emails, visits the pricing page.",
+                "Hot Lead: Has requested a quote or booked a consultation. Needs immediate human outreach."
+              ]},
+              { subtitle: "8.3 Mastering GoHighLevel (GHL)", text: "GoHighLevel replaces the need for 10 different software subscriptions. It combines email marketing, SMS text campaigns, calendar bookings, and pipeline management." },
+              { video: "https://www.youtube.com/embed/MYE6T_gd7H0" },
+              { subtitle: "8.4 Pipelines and Stages", text: "In GHL, VAs build 'Pipelines' (a visual representation of the sales process). A lead moves from 'New Lead' -> 'Contacted' -> 'Appointment Booked' -> 'Closed Won'. VAs are responsible for keeping these clean." }
+            ]
+          },
+          {
+            id: 9, title: "System Integrations", icon: "fa-layer-group",
+            content: [
+              { subtitle: "9.1 Automating the Business", text: "Integrations take a VA from being an 'assistant' to an 'automation engineer'. By connecting different apps, you eliminate hours of manual data entry, reducing human error to zero." },
+              { video: "https://www.youtube.com/embed/sQD7kaZ5h0s" },
+              { subtitle: "9.2 APIs vs Webhooks", list: [
+                "APIs (Application Programming Interfaces): Like a waiter asking the kitchen 'Is the food ready?'. Software A periodically asks Software B if there is new data. It requires polling.",
+                "Webhooks: Like the kitchen ringing a bell the exact second the food is ready. Software A instantly pushes data to Software B the moment an event occurs. Webhooks are faster."
+              ]},
+              { subtitle: "9.3 Building Workflows with Top Integration Tools", list: [
+                `<a href="https://zapier.com" target="_blank" class="${linkStyle}">Zapier</a>: The industry standard. Easy to learn with thousands of connections. Uses 'Triggers' and 'Actions'.`,
+                `<a href="https://www.make.com" target="_blank" class="${linkStyle}">Make (Integromat)</a>: More visual and slightly more complex, but allows for incredibly advanced, multi-branching automations at a lower cost.`
+              ]}
+            ]
+          },
+          {
+            id: 10, title: "Email Marketing", icon: "fa-envelope",
+            content: [
+              { subtitle: "10.1 The Value of an Email List", text: "Social media followers are 'rented' audiences; an algorithm change can hide your content tomorrow. An email list is an 'owned' asset. You have direct access to their inbox anytime you want." },
+              { video: "https://www.youtube.com/embed/uVWmh3ikMnA" },
+              { subtitle: "10.2 Advanced Email Strategies", list: [
+                "Segmentation: Never email everyone at once. Tag users based on behavior (e.g., 'Clicked shoe link', 'Bought hats'). Send specific emails based on those tags.",
+                "A/B Testing: Send Subject Line A to 10% of the list, and Subject Line B to another 10%. Whichever gets more opens automatically gets sent to the remaining 80%.",
+                "Deliverability & Spam Filters: Avoid ALL CAPS, excessive exclamation points, and trigger words like 'FREE MONEY' to ensure your email lands in the Primary inbox."
+              ]},
+              { subtitle: "10.3 Top Email Marketing Softwares", list: [
+                `<a href="https://mailchimp.com" target="_blank" class="${linkStyle}">Mailchimp</a>: Great for beginners and small e-commerce stores.`,
+                `<a href="https://convertkit.com" target="_blank" class="${linkStyle}">ConvertKit</a>: The best choice for creators, bloggers, and newsletter writers.`,
+                `<a href="https://www.gohighlevel.com" target="_blank" class="${linkStyle}">GoHighLevel</a>: Best for agencies and combining email with SMS.`
+              ]}
+            ]
+          },
+          {
+            id: 11, title: "Analytics and Performance", icon: "fa-chart-bar",
+            content: [
+              { subtitle: "11.1 The Mathematics of Marketing", text: "A professional VA doesn't just post content; they report on what the content achieved. Understanding advanced analytics allows you to tell a client exactly how much money their marketing is making them." },
+              { subtitle: "11.2 Core Metrics Defined", list: [
+                "Views / Impressions: Total times an ad was displayed. High views mean good budget allocation and targeting.",
+                "Reach: Unique individuals who saw the ad. If Impressions are 10k and Reach is 2k, your audience is seeing the ad 5 times each (Frequency = 5).",
+                "Engagement Rate: (Likes + Comments + Shares) / Reach. A 3-5% engagement rate is considered very healthy. It proves the content is resonating.",
+                "CTR (Click-Through Rate): Clicks / Impressions. If 1,000 people see an ad and 100 click, the CTR is 10%. High CTR means your Hook and CTA are incredibly strong."
+              ]},
+              { subtitle: "11.3 Advanced Business Metrics", list: [
+                "CAC (Customer Acquisition Cost): Total marketing spend divided by new customers. If you spend $100 on ads and get 2 customers, your CAC is $50.",
+                "LTV (Lifetime Value): The total revenue a customer will spend with the business over years. If LTV is $500, a $50 CAC is highly profitable.",
+                "ROAS (Return on Ad Spend): If you spend $1 on ads and make $4 in sales, your ROAS is 4x."
+              ]}
+            ]
+          },
+          {
+            id: 12, title: "Advanced Applications", icon: "fa-arrow-trend-up",
+            content: [
+              { subtitle: "12.1 Strategic Campaign Development", list: [
+                "Phase 1: Market Research - Using tools to see what competitors are ranking for.",
+                "Phase 2: Strategy - Deciding the mix of Organic Content, Email Sequences, and Paid Ads.",
+                "Phase 3: Execution - The VA schedules the posts, sets up the GHL automations, and tests the webhooks.",
+                "Phase 4: Optimization - Looking at Analytics after 7 days to pause failing ads and double the budget on winning ads."
+              ]},
+              { subtitle: "12.2 Elite VA Professional Skills", text: "Beyond technical skills, elite VAs communicate proactively. They send clients Weekly End-of-Day (EOD) reports summarizing exactly what was done, what the metrics look like, and what the strategy is for next week. They solve problems before the client even realizes they exist." }
+            ]
+          },
+          {
+            id: 13, title: "Caption Writing Strategy", icon: "fa-pen-to-square", interactive: <CaptionSimulator />,
+            content: [
+              { subtitle: "13.1 The Anatomy of a High-Converting Caption", text: "A caption is micro-copywriting. It must immediately grab attention, retain it through storytelling or education, and direct the user to a specific action. Never write a caption that simply describes what is happening in the photo." },
+              { subtitle: "13.2 Deep Dive into the 4 Elements", list: [
+                "1. The Hook: The most critical part. It must disrupt the scroll. Use formatting (like ALL CAPS on one word, or an emoji) to draw the eye.",
+                "2. The Body: Format this for readability. Break up large blocks of text. Use line breaks. Keep sentences short and punchy.",
+                "3. The CTA: Only give ONE command. If you say 'Like, comment, share, and buy my course', the user will do nothing. Choose one: 'Comment YES to get the link'.",
+                "4. Hashtags: Place them at the very bottom, separated by space so they don't clutter the reading experience."
+              ]},
+              { subtitle: "13.3 Writing for Different Platforms", text: "LinkedIn requires professional, story-driven, text-heavy captions. Instagram relies on short, punchy, aesthetically formatted text. TikTok captions are very brief and prioritize keywords for the search algorithm." }
+            ]
+          },
+          {
+            id: 14, title: "Hashtag Strategy", icon: "fa-hashtag",
+            content: [
+              { subtitle: "14.1 The Evolution of Hashtags", text: "In the past, hashtags were purely for discovery. Today, they act as SEO categorization tags for the platform's AI. They tell the algorithm exactly who to serve your content to on the 'Explore' or 'For You' pages." },
+              { subtitle: "14.2 The Ladder Strategy", list: [
+                "Volume Laddering: Don't just use massive tags like #Business (100M+ posts). Your post will be buried in seconds. Mix them with medium tags (100k-500k) and hyper-niche tags (10k-50k).",
+                "Location Tags: If managing a local business (e.g., a dentist in Chicago), #ChicagoDentist is infinitely more valuable than #TeethWhitening.",
+                "Brand Tags: Always include the client's custom tag (e.g., #Nike) so users can click it and see a gallery of all your branded content."
+              ]},
+              { subtitle: "14.3 Monitoring and Adjusting", text: "Use platform insights to see how many impressions came directly 'From Hashtags'. If that number drops over time, your current hashtag set is likely exhausted or shadowbanned. Rotate your sets weekly." }
+            ]
+          },
+          {
+            id: 15, title: "SEO for Virtual Assistants", icon: "fa-bullseye",
+            content: [
+              { subtitle: "15.1 VA Roles in SEO", text: "While you may not be a senior SEO engineer, a VA is heavily involved in the execution. You will be asked to upload blog posts, format headers, add internal links, and compress images so the site loads faster." },
+              { subtitle: "15.2 Critical On-Page SEO Checklist", list: [
+                "H1 Tag: Only ONE per page. It should contain the primary keyword.",
+                "H2/H3 Tags: Used to break up content logically. Google reads these to understand page structure.",
+                "Meta Description: This does not directly impact ranking, but a compelling meta description increases CTR on the Search Page, which Google DOES reward.",
+                "Internal Linking: Linking from your new blog post to an older blog post on your site. This passes 'link juice' and keeps users on the site longer."
+              ]},
+              { subtitle: "15.3 Image SEO Mastery", text: "Never upload an image named 'IMG_4092.jpg'. Rename it to 'digital-marketing-virtual-assistant.jpg' before uploading. Then, add descriptive Alt-Text describing the image for visually impaired users. Google's image search relies entirely on this data." }
+            ]
+          },
+          {
+            id: 16, title: "Using SEMrush", icon: "fa-crosshairs", interactive: <SEMrushSimulator />,
+            content: [
+              { subtitle: "16.1 The Industry Standard Tool", text: `The gold standard tool for all serious SEO research is <a href="https://www.semrush.com" target="_blank" class="${linkStyle}">SEMrush</a>. It is an enterprise-level platform used to spy on competitors, find lucrative keywords, and audit website health. Knowing how to navigate it makes a VA highly valuable.` },
+              { subtitle: "16.2 Core Workflows for VAs", list: [
+                "Keyword Magic Tool: Used to find long-tail keywords (e.g., 'best CRM for small digital marketing agencies') which have lower search volume but much higher intent to purchase.",
+                "Keyword Difficulty (KD): A metric from 1-100. If a client's website is brand new, a VA should filter out keywords with a KD over 30, as they are too competitive to rank for.",
+                "Site Audit: A tool that crawls the website and provides a list of errors (broken links, missing tags, slow pages). A VA can export this report and fix the errors systematically."
+              ]},
+              { subtitle: "16.3 Competitor Research", text: "You can plug a competitor's domain into SEMrush and instantly see exactly which keywords bring them the most traffic, and even view the exact Google Ads they are currently paying to run." }
+            ]
+          },
+          {
+            id: 17, title: "Sample Caption Frameworks", icon: "fa-file-lines",
+            content: [
+              { subtitle: "17.1 Educational Framework (Value First)", list: [
+                "Hook: The biggest lie you've been told about SEO.",
+                "Body: Everyone says you need more backlinks. But if your on-page structure is broken, sending traffic to it is like pouring water into a leaky bucket. Focus on your H1s, internal linking, and load speed first.",
+                "CTA: Save this post to use as an audit checklist for your own website.",
+                "Hashtags: #SEOTips #WebsiteAudit #VirtualAssistant"
+              ]},
+              { subtitle: "17.2 Promotional Framework (Problem/Agitate/Solution)", list: [
+                "Hook: Are you spending 10 hours a week just answering emails?",
+                "Body: (Agitate) That is 40 hours a month you aren't spending on growing your business. It leads to burnout and missed opportunities. (Solution) Our certified VAs can take over your inbox, automate your CRM, and buy your time back.",
+                "CTA: Click the link in our bio to book a free discovery call and see how much time we can save you."
+              ]},
+              { subtitle: "17.3 Engagement Framework (Community Building)", list: [
+                "Hook: Unpopular opinion: TikTok is better for B2B than LinkedIn.",
+                "Body: We have seen massive shifts in where business owners consume content. The raw authenticity of video is converting faster than polished corporate posts.",
+                "CTA: Do you agree or disagree? Let's debate in the comments below."
+              ]}
+            ]
+          },
+          {
+            id: 18, title: "Course Outcomes & Next Steps", icon: "fa-circle-check",
+            content: [
+              { subtitle: "Comprehensive Learner Outcomes", text: "By completing this intensive training, you have transitioned from a general administrative assistant into a specialized Digital Marketing Virtual Assistant. You are now equipped to:", list: [
+                "Architect and execute multi-platform social media strategies that drive real engagement.",
+                "Engineer high-converting prompts for AI tools like ChatGPT and Gemini to scale content production.",
+                "Build, manage, and optimize complex CRM pipelines in GoHighLevel.",
+                "Automate business operations using Webhooks and Zapier.",
+                "Analyze complex data metrics (CAC, ROAS, CTR) and translate them into actionable business advice for clients."
+              ]},
+              { subtitle: "Next Steps for Career Growth", list: [
+                "Build a Portfolio: Create mock campaigns, graphics, and email sequences to prove your skills.",
+                "Master Cold Outreach: Use your new copywriting skills to pitch local businesses on how you can improve their SEO or manage their CRM.",
+                "Continuous Learning: Digital marketing changes weekly. Stay updated on algorithm shifts and new AI tools."
+              ]}
+            ]
+          }
+        ];
+
+        function App() {
+          const [activeModuleId, setActiveModuleId] = useState(1);
+          const [sidebarOpen, setSidebarOpen] = useState(false);
+
+          const activeModule = COURSE_DATA.find(m => m.id === activeModuleId);
+          const progress = (activeModuleId / COURSE_DATA.length) * 100;
+
+          return (
+            <div className="flex h-screen bg-slate-50 font-sans text-slate-900 overflow-hidden selection:bg-slate-200 selection:text-slate-900">
+              
+              {/* Mobile Sidebar Overlay */}
+              {sidebarOpen && (
+                <div className="fixed inset-0 bg-slate-900/40 z-20 md:hidden backdrop-blur-sm" onClick={() => setSidebarOpen(false)}></div>
+              )}
+
+              {/* Sidebar Navigation */}
+              <aside className={`fixed md:static inset-y-0 left-0 w-80 bg-white border-r border-slate-200 text-slate-800 transform transition-transform duration-300 ease-in-out z-30 flex flex-col shadow-2xl md:shadow-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
+                
+                {/* Monochromatic Header */}
+                <div className="p-6 bg-slate-900 flex flex-col border-b border-slate-800 relative overflow-hidden">
+                  <div className="flex justify-between items-center mt-2">
+                    <div>
+                      <h1 className="text-xl font-black leading-tight tracking-tight text-white flex items-center gap-2">
+                        <i className="fa-solid fa-table-columns w-5 h-5 text-slate-300"></i> Digital Marketing
+                      </h1>
+                      <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase mt-1">For Virtual Assistants</p>
+                    </div>
+                    <button className="md:hidden text-slate-400 hover:text-white" onClick={() => setSidebarOpen(false)}>
+                      <i className="fa-solid fa-xmark w-6 h-6"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="flex-1 overflow-y-auto py-6 custom-scrollbar bg-slate-50">
+                  <div className="px-6 mb-6">
+                    <div className="flex justify-between text-xs font-bold text-slate-500 mb-2 uppercase tracking-wider">
+                      <span>Course Progress</span>
+                      <span className="text-slate-800">{Math.round(progress)}%</span>
+                    </div>
+                    <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden shadow-inner">
+                      <div className="h-2.5 rounded-full transition-all duration-700 bg-slate-800" style={{ width: `${progress}%` }}></div>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-1.5 px-4">
+                    {COURSE_DATA.map((mod) => {
+                      const isActive = activeModuleId === mod.id;
+                      return (
+                        <li key={mod.id}>
+                          <button
+                            onClick={() => { setActiveModuleId(mod.id); setSidebarOpen(false); }}
+                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-left border ${isActive ? 'bg-white text-slate-900 font-bold border-slate-200 shadow-sm border-l-4 border-l-slate-900' : 'bg-transparent text-slate-600 border-transparent hover:bg-slate-200 hover:text-slate-900 font-semibold'}`}
+                          >
+                            <i className={`fa-solid ${mod.icon} w-5 h-5 flex-shrink-0 ${isActive ? 'text-slate-900' : 'text-slate-400'}`}></i>
+                            <span className="text-sm leading-tight line-clamp-2">
+                              <span className={`opacity-70 mr-1.5 ${isActive ? 'text-slate-900' : ''}`}>{mod.id}.</span> 
+                              {mod.title}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </aside>
+
+              {/* Main Content Area */}
+              <main className="flex-1 flex flex-col h-full bg-white relative overflow-hidden z-10">
+                
+                {/* Top Header */}
+                <header className="flex items-center gap-4 p-5 md:p-8 border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-10">
+                  <button className="md:hidden p-2.5 rounded-lg bg-slate-50 text-slate-600 border border-slate-200 hover:bg-slate-100" onClick={() => setSidebarOpen(true)}>
+                    <i className="fa-solid fa-bars w-5 h-5"></i>
+                  </button>
+                  <div>
+                    <span className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5 block">Module {activeModule.id}</span>
+                    <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{activeModule.title}</h2>
+                  </div>
+                </header>
+
+                {/* Content Scroll Area */}
+                <div className="flex-1 overflow-y-auto p-5 md:p-10 custom-scrollbar pb-32 bg-white">
+                  <div className="max-w-4xl mx-auto space-y-12">
+                    
+                    {activeModule.content.map((section, idx) => (
+                      <div key={idx} className="space-y-5 relative">
+                        
+                        {/* Render Text Content */}
+                        {section.subtitle && (
+                          <h3 className="text-xl md:text-2xl font-extrabold text-slate-800 border-b-2 border-slate-100 pb-3 inline-block">
+                            {section.subtitle}
+                          </h3>
+                        )}
+                        
+                        {section.text && (
+                          <p 
+                            className="text-slate-700 leading-relaxed text-base font-medium"
+                            dangerouslySetInnerHTML={{__html: section.text}}
+                          />
+                        )}
+                        
+                        {section.list && (
+                          <ul className="space-y-3.5 mt-4">
+                            {section.list.map((item, i) => (
+                              <li key={i} className="flex items-start gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800 text-base font-medium shadow-sm hover:shadow-md transition-shadow">
+                                <i className="fa-solid fa-chevron-right w-5 h-5 text-slate-900 flex-shrink-0 mt-0.5"></i>
+                                <span dangerouslySetInnerHTML={{__html: item.replace(/^([^:]+):/, '<strong class="font-black text-slate-900">$1:</strong>')}} />
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+
+                        {/* Render Interactive Element embedded within the loop if passed here */}
+                        {section.interactive && (
+                          <div className="mt-6">
+                            {section.interactive}
+                          </div>
+                        )}
+
+                        {/* Render Video Iframe */}
+                        {section.video && (
+                          <div className="my-8 rounded-2xl overflow-hidden border border-slate-300 shadow-sm bg-slate-100 aspect-video relative">
+                             <iframe 
+                                src={section.video.split('?')[0]} 
+                                title={`Video for ${activeModule.title}`} 
+                                className="absolute inset-0 w-full h-full"
+                                frameBorder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen>
+                             </iframe>
+                          </div>
+                        )}
+
+                      </div>
+                    ))}
+
+                    {/* Render Module-Level Interactive Element if it exists */}
+                    {activeModule.interactive && !activeModule.content.some(c => c.interactive) && (
+                      <div className="mt-12 pt-8 border-t border-slate-200">
+                        {activeModule.interactive}
+                      </div>
+                    )}
+
+                    {/* Navigation Buttons */}
+                    <div className="flex justify-between items-center pt-12 mt-16 border-t border-slate-200">
+                      <button 
+                        onClick={() => setActiveModuleId(Math.max(1, activeModuleId - 1))}
+                        disabled={activeModuleId === 1}
+                        className="px-6 py-3 rounded-xl border-2 border-slate-300 text-slate-700 font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:border-slate-900 hover:text-slate-900 transition-colors text-sm"
+                      >
+                        Previous Module
+                      </button>
+                      <button 
+                        onClick={() => setActiveModuleId(Math.min(COURSE_DATA.length, activeModuleId + 1))}
+                        disabled={activeModuleId === COURSE_DATA.length}
+                        className="px-6 py-3 rounded-xl bg-slate-900 text-white font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black transition-colors flex items-center gap-2 text-sm shadow-md"
+                      >
+                        Next Module <i className="fa-solid fa-play w-4 h-4"></i>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </main>
+            </div>
+          );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
