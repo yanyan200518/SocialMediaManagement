@@ -39,7 +39,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState } = React;
+        const { useState, useEffect } = React;
 
         // --- INTERACTIVE COMPONENTS (MONOCHROMATIC BRANDING) ---
 
@@ -76,8 +76,8 @@
                   </div>
                   <p className="text-sm font-bold text-slate-700 mb-2">Select Typography</p>
                   <div className="flex gap-2">
-                    <button onClick={() => setActiveFont('font-sans')} className={`px-4 py-2 rounded-lg font-bold transition-colors border ${activeFont === 'font-sans' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}`}>Sans-serif (Modern)</button>
-                    <button onClick={() => setActiveFont('font-serif')} className={`px-4 py-2 rounded-lg font-bold transition-colors border ${activeFont === 'font-serif' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}`}>Serif (Traditional)</button>
+                    <button onClick={() => setActiveFont('font-sans')} className={`px-4 py-2 rounded-lg font-bold transition-colors border ${activeFont === 'font-sans' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}`}>Sans-serif</button>
+                    <button onClick={() => setActiveFont('font-serif')} className={`px-4 py-2 rounded-lg font-bold transition-colors border ${activeFont === 'font-serif' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}`}>Serif</button>
                   </div>
                 </div>
                 <div 
@@ -230,6 +230,64 @@
           );
         };
 
+        const SEOStructureVisualizer = () => {
+          return (
+            <div className="bg-slate-50 border border-slate-300 rounded-xl p-6 my-6 shadow-sm">
+              <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-200 pb-3">
+                <i className="fa-solid fa-code w-5 h-5 text-slate-700 flex items-center justify-center"></i> 
+                Interactive: SEO Content Structure (H1, H2, P)
+              </h4>
+              <p className="text-sm text-slate-600 mb-6 pt-2">Hover over the blocks below to visualize how search engines read your page structure (HTML Tags) compared to how human visitors see the text.</p>
+              
+              <div className="space-y-4 font-sans border-l-4 border-slate-300 pl-4 relative md:ml-8">
+                {/* H1 Block */}
+                <div className="group relative border-2 border-transparent hover:border-slate-800 p-3 rounded-lg transition-colors cursor-crosshair bg-white shadow-sm">
+                  <div className="absolute -left-12 md:-left-16 top-4 bg-slate-900 text-white text-xs font-bold px-2 py-1 rounded opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                    &lt;H1&gt;
+                  </div>
+                  <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-2">The Ultimate Guide to Digital Marketing</h1>
+                  <div className="hidden group-hover:block text-xs text-slate-500 font-mono mt-2 bg-slate-100 p-2 rounded border border-slate-200">
+                    <strong>Rule:</strong> Only ONE H1 per page. This acts as the main title and tells Google exactly what the page is about.
+                  </div>
+                </div>
+
+                {/* Paragraph Block */}
+                <div className="group relative border-2 border-transparent hover:border-slate-400 p-3 rounded-lg transition-colors cursor-crosshair">
+                  <div className="absolute -left-12 md:-left-16 top-4 bg-slate-500 text-white text-xs font-bold px-2 py-1 rounded opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                    &lt;p&gt;
+                  </div>
+                  <p className="text-sm text-slate-700">Digital marketing is essential for modern business growth. In this guide, we will explore the best strategies...</p>
+                  <div className="hidden group-hover:block text-xs text-slate-500 font-mono mt-2 bg-slate-100 p-2 rounded border border-slate-200">
+                    <strong>Content:</strong> Standard paragraph text. Should include secondary keywords naturally so search engines have context.
+                  </div>
+                </div>
+
+                {/* H2 Block */}
+                <div className="group relative border-2 border-transparent hover:border-slate-700 p-3 rounded-lg transition-colors cursor-crosshair bg-white shadow-sm">
+                  <div className="absolute -left-12 md:-left-16 top-4 bg-slate-700 text-white text-xs font-bold px-2 py-1 rounded opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                    &lt;H2&gt;
+                  </div>
+                  <h2 className="text-xl md:text-2xl font-bold text-slate-800 mb-2">1. Understanding Search Engine Optimization</h2>
+                  <div className="hidden group-hover:block text-xs text-slate-500 font-mono mt-2 bg-slate-100 p-2 rounded border border-slate-200">
+                    <strong>Rule:</strong> Use H2s to break the article into major sections or chapters.
+                  </div>
+                </div>
+
+                {/* H3 Block */}
+                <div className="group relative border-2 border-transparent hover:border-slate-600 p-3 rounded-lg transition-colors cursor-crosshair">
+                  <div className="absolute -left-12 md:-left-16 top-4 bg-slate-600 text-white text-xs font-bold px-2 py-1 rounded opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                    &lt;H3&gt;
+                  </div>
+                  <h3 className="text-lg md:text-xl font-bold text-slate-700 mb-2">On-Page vs Off-Page SEO</h3>
+                  <div className="hidden group-hover:block text-xs text-slate-500 font-mono mt-2 bg-slate-100 p-2 rounded border border-slate-200">
+                    <strong>Rule:</strong> Use H3s for sub-topics under an H2. Maintains hierarchical logic so Google's web crawlers don't get confused.
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
         const CaptionSimulator = () => {
           const [hook, setHook] = useState('Your content can look good and still fail to perform.');
           const [body, setBody] = useState('A strong visual is only one part of digital marketing. If your caption does not guide the reader, build interest, or provide a next step, your post may get attention but not results.');
@@ -367,6 +425,103 @@
           );
         };
 
+        // --- QUIZ COMPONENT ---
+        const QuizSection = ({ questions, moduleId, onPass, isPassed }) => {
+          const [shuffledQuestions, setShuffledQuestions] = useState([]);
+          const [answers, setAnswers] = useState({});
+          const [submitted, setSubmitted] = useState(false);
+          const [score, setScore] = useState(0);
+
+          // Function to shuffle questions and options securely
+          const initQuiz = () => {
+            const shuffled = questions.map(q => {
+              const correctText = q.o[q.a]; // Store the exact string of the correct answer
+              const shuffledOptions = [...q.o].sort(() => Math.random() - 0.5);
+              return { ...q, o: shuffledOptions, correctText };
+            }).sort(() => Math.random() - 0.5); // Shuffle the order of questions
+            
+            setShuffledQuestions(shuffled);
+            setAnswers({});
+            setSubmitted(false);
+            setScore(0);
+          };
+
+          useEffect(() => {
+            initQuiz();
+          }, [moduleId]);
+
+          const handleOptionChange = (qIndex, optText) => {
+            if (submitted && isPassed) return;
+            setAnswers({...answers, [qIndex]: optText});
+          };
+
+          const handleSubmit = () => {
+            let correct = 0;
+            shuffledQuestions.forEach((q, i) => {
+              if(answers[i] === q.correctText) correct++;
+            });
+            const pct = (correct / shuffledQuestions.length) * 100;
+            setScore(pct);
+            setSubmitted(true);
+            if(pct >= 90) onPass();
+          };
+
+          if (isPassed) {
+            return (
+              <div className="bg-slate-100 p-6 rounded-xl border-l-4 border-slate-900 mt-12 shadow-sm">
+                <h3 className="text-slate-900 font-extrabold text-xl flex items-center gap-2">
+                  <i className="fa-solid fa-circle-check"></i> Module Passed! ({score || 100}%)
+                </h3>
+                <p className="text-slate-700 mt-2 font-medium">You have successfully unlocked the next module.</p>
+              </div>
+            );
+          }
+
+          return (
+             <div className="bg-slate-50 border border-slate-300 p-6 md:p-8 rounded-2xl mt-12 shadow-sm">
+               <h3 className="text-2xl font-extrabold text-slate-900 mb-6 border-b border-slate-200 pb-4">
+                 <i className="fa-solid fa-clipboard-check mr-2"></i>Module {moduleId} Quiz (Requirement: 90%)
+               </h3>
+               
+               {submitted && score < 90 ? (
+                 <div className="bg-white border-2 border-slate-800 text-slate-900 p-8 rounded-xl text-center shadow-sm">
+                   <i className="fa-solid fa-triangle-exclamation text-slate-600 text-4xl mb-4"></i>
+                   <h4 className="text-2xl font-extrabold mb-2">Score: {score}%</h4>
+                   <p className="text-slate-600 font-medium mb-6">You need 90% (9/10) to proceed. You did not meet the requirement.</p>
+                   <button onClick={initQuiz} className="px-8 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-black transition-colors shadow-md">
+                     <i className="fa-solid fa-rotate-right mr-2"></i> Retake Quiz
+                   </button>
+                 </div>
+               ) : (
+                 <>
+                   <div className="space-y-6">
+                     {shuffledQuestions.map((q, i) => (
+                        <div key={i} className="bg-white p-6 rounded-xl border border-slate-200 shadow-md hover:shadow-lg transition-shadow relative overflow-hidden">
+                          <div className="absolute top-0 left-0 w-1.5 h-full bg-slate-800"></div>
+                          <p className="font-extrabold text-slate-800 mb-4 pl-2 text-lg">{i + 1}. {q.q}</p>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pl-2">
+                            {q.o.map((opt, optIdx) => (
+                               <label key={optIdx} className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${answers[i] === opt ? 'bg-slate-900 text-white border-slate-900 shadow-md transform scale-[1.02]' : 'bg-slate-50 border-slate-200 hover:bg-slate-100 hover:border-slate-400'}`}>
+                                 <input type="radio" name={`q-${i}`} checked={answers[i] === opt} onChange={() => handleOptionChange(i, opt)} className="hidden" />
+                                 <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${answers[i] === opt ? 'border-white' : 'border-slate-400 bg-white'}`}>
+                                    {answers[i] === opt && <div className="w-2.5 h-2.5 rounded-full bg-white"></div>}
+                                 </div>
+                                 <span className="text-sm font-bold leading-snug">{opt}</span>
+                               </label>
+                            ))}
+                          </div>
+                        </div>
+                     ))}
+                   </div>
+                   <button onClick={handleSubmit} disabled={Object.keys(answers).length < shuffledQuestions.length} className="mt-8 px-6 py-4 bg-slate-900 text-white font-extrabold text-lg rounded-xl w-full hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md">
+                     {Object.keys(answers).length < shuffledQuestions.length ? `Answer all 10 questions to submit (${Object.keys(answers).length}/10)` : 'Submit Quiz'}
+                   </button>
+                 </>
+               )}
+             </div>
+          )
+        };
+
         // --- LINK HELPER ---
         const linkStyle = "text-slate-900 underline decoration-slate-400 hover:decoration-slate-900 font-bold transition-colors";
 
@@ -375,7 +530,7 @@
           {
             id: 1, title: "Principles of Marketing & Course Setup", icon: "fa-book-open",
             content: [
-              { subtitle: "1.1 How to Use This Course (Best Practices)", text: "This course is highly interactive and practical. For the best learning experience, we highly recommend a <strong>split-screen setup</strong>. <br/><br/>If you have dual monitors, keep this course open on one screen and the software (like Canva, SEMrush, or GoHighLevel) open on the other. If you are using a single monitor, split your browser windows side-by-side or use dual tabs. Do not just read—open the tools and follow along as you go." },
+              { subtitle: "1.1 How to Use This App (Recommended Usage)", text: "This course is highly interactive and practical. To get a real-life experience and the absolute best results, <strong>we highly recommend a dual-screen setup.</strong><br/><br/>Open this app on one monitor, and open the software being discussed (like Canva, SEMrush, or GoHighLevel) on your second monitor. Follow the modules and copy what the module is saying as you go. <br/><br/>If you want to avoid a single monitor struggle, you can achieve a similar effect by using a <strong>dual-tab setup</strong>. Simply split your browser windows side-by-side so you can read and execute simultaneously." },
               { subtitle: "1.2 Definition & Philosophy", text: "Marketing is far more than just advertising. It is the structured process of identifying human or business needs, engineering a solution that provides genuine value, and effectively communicating that value to facilitate a transaction. It relies heavily on psychology and market research to understand what the consumer truly desires before a product is even made." },
               { subtitle: "1.3 Inbound vs Outbound Marketing", list: [
                 "Inbound Marketing: Magnetizing customers to your business by creating valuable content (Blogs, SEO, Social Media) that answers their questions.",
@@ -387,6 +542,18 @@
                 "Bottom of Funnel (BOFU) - Conversion: The user is ready to buy. Your goal is removing friction and providing a strong Call-to-Action (CTA).",
                 "Retention & Advocacy: Marketing doesn't stop at the sale. Keeping the customer happy so they refer others is the most profitable phase."
               ]}
+            ],
+            quiz: [
+              { q: "What is the primary goal of marketing?", o: ["Providing genuine value", "Just selling products", "Spamming users", "Making logos"], a: 0 },
+              { q: "Which of the following is an example of Inbound Marketing?", o: ["TV Ads", "Cold Calling", "SEO/Blogs", "Billboards"], a: 2 },
+              { q: "Which of the following is an example of Outbound Marketing?", o: ["Viral posts", "Cold calling", "SEO", "Blogs"], a: 1 },
+              { q: "What does TOFU stand for?", o: ["Terms of Funnel", "Type of Funnel", "Top of Funnel", "Top of Frequency"], a: 2 },
+              { q: "What is the primary goal of the MOFU stage?", o: ["Instant sales", "Building trust/Consideration", "Spamming", "Ignoring leads"], a: 1 },
+              { q: "What is the primary goal of the BOFU stage?", o: ["Retention", "Awareness", "Conversion", "Education"], a: 2 },
+              { q: "What is considered the most profitable phase of the funnel?", o: ["BOFU", "Retention & Advocacy", "TOFU", "MOFU"], a: 1 },
+              { q: "Why is market research important before a product is made?", o: ["To understand what the consumer truly desires", "To waste money", "To pick a logo color", "To annoy people"], a: 0 },
+              { q: "What is the recommended setup for taking this course?", o: ["Mobile phone only", "Dual-screen or split-tab setup", "Audio only", "Reading a printed copy"], a: 1 },
+              { q: "What does BOFU stand for?", o: ["Base of Funnel", "Bottom of Funnel", "Back of Funnel", "Beginning of Funnel"], a: 1 }
             ]
           },
           {
@@ -403,20 +570,43 @@
                 "Owned Media: Assets you control completely (Your Website, Your Email List, Your Blog).",
                 "Earned Media: When others talk about you for free (Customer Reviews, PR mentions, Viral shares)."
               ]}
+            ],
+            quiz: [
+              { q: "What is a massive advantage of digital marketing over traditional marketing?", o: ["It cannot be tracked", "Precise targeting and real-time tracking", "It is always more expensive", "It reaches fewer people"], a: 1 },
+              { q: "What does B2B stand for?", o: ["Business to Consumer", "Buyer to Buyer", "Business to Business", "Brand to Brand"], a: 2 },
+              { q: "Which platform is dominant in B2B marketing?", o: ["Snapchat", "TikTok", "LinkedIn", "Pinterest"], a: 2 },
+              { q: "What does B2C marketing primarily focus on?", o: ["Emotion & quick decisions", "Logic & ROI", "Long decision cycles", "Spreadsheets"], a: 0 },
+              { q: "Which of the following is an example of Paid Media?", o: ["Your Website", "Customer Reviews", "Google Ads", "Your Blog"], a: 2 },
+              { q: "Which of the following is an example of Owned Media?", o: ["Facebook Ads", "Your Email List", "Viral shares", "PR mentions"], a: 1 },
+              { q: "Which of the following is an example of Earned Media?", o: ["Sponsored Content", "Your Website", "Customer Reviews", "Google Ads"], a: 2 },
+              { q: "What does B2C stand for?", o: ["Business to Customer", "Business to Consumer", "Buyer to Consumer", "Brand to Client"], a: 1 },
+              { q: "Which platform is highly critical for B2C?", o: ["LinkedIn", "Instagram", "Yellow Pages", "Direct Mail"], a: 1 },
+              { q: "What does ROI stand for in B2B logic?", o: ["Return on Internet", "Return on Investment", "Reach on Instagram", "Rate of Interaction"], a: 1 }
             ]
           },
           {
             id: 3, title: "Social Media Management", icon: "fa-share-nodes",
             content: [
               { subtitle: "3.1 Understanding Social Algorithms", text: "A Social Media Manager must understand that platforms do not show your posts to all your followers. Algorithms dictate visibility based on 'Signals' like watch time, saves, and comments. The algorithm's only goal is to keep users on the app longer; if your content does that, you will be rewarded with reach." },
-              { video: "https://www.youtube.com/embed/U0keUj6EoDM" },
-              { video: "https://www.youtube.com/embed/q4OWKoUUjdY" },
+              { video: "https://www.youtube.com/embed/Sxo6ulJkMNs" },
               { subtitle: "3.2 Content Pillars & Strategy", text: "Content shouldn't be random. A Virtual Assistant should develop 3 to 5 'Content Pillars' for a brand. For example, a fitness brand's pillars might be: 1) Workout Tutorials, 2) Nutrition Myths, 3) Client Success Stories, and 4) Behind-the-Scenes. This ensures a consistent brand voice." },
               { subtitle: "3.3 Community Management", list: [
                 "Proactive Engagement: Leaving thoughtful comments on target audience accounts before they even follow you.",
                 "Reactive Engagement: Replying to DMs and comments quickly. This trains the algorithm that your account is highly active.",
                 "Crisis Management: Knowing how to professionally respond to a negative review or angry customer publicly."
               ]}
+            ],
+            quiz: [
+              { q: "Do social platforms show your posts to all of your followers?", o: ["Yes, always", "Only on weekends", "No, algorithms dictate visibility", "Only if you pay"], a: 2 },
+              { q: "What is the primary goal of a social media algorithm?", o: ["To keep users on the app longer", "To make you famous", "To hide your posts", "To sell products directly"], a: 0 },
+              { q: "What are 'Signals' to an algorithm?", o: ["Watch time, saves, and comments", "The color of your logo", "The time you wake up", "The font used in the video"], a: 0 },
+              { q: "What are Content Pillars?", o: ["Physical structures", "3 to 5 strategic content categories", "Random thoughts", "Paid advertisements"], a: 1 },
+              { q: "Why use Content Pillars?", o: ["To ensure a consistent brand voice", "To confuse the audience", "To spend more money", "There is no reason"], a: 0 },
+              { q: "What is proactive engagement?", o: ["Replying to DMs", "Commenting on target accounts before they follow you", "Deleting bad comments", "Ignoring users"], a: 1 },
+              { q: "What is reactive engagement?", o: ["Replying to DMs and comments quickly", "Posting random videos", "Ignoring DMs", "Only liking posts"], a: 0 },
+              { q: "What does fast reactive engagement do?", o: ["Annoys users", "Trains the algorithm your account is highly active", "Gets you banned", "Nothing"], a: 1 },
+              { q: "What is Crisis Management in social media?", o: ["Deleting all comments", "Starting arguments", "Professionally responding to a negative review publicly", "Ignoring angry customers"], a: 2 },
+              { q: "How many Content Pillars are recommended?", o: ["1", "10 to 15", "0", "3 to 5"], a: 3 }
             ]
           },
           {
@@ -434,6 +624,18 @@
                 `Free / Browser-Based: <a href="https://www.canva.com" target="_blank" class="${linkStyle}">Canva</a> (Best for quick templates), <a href="https://www.figma.com" target="_blank" class="${linkStyle}">Figma</a> (Best for UI/Layouts), <a href="https://www.photopea.com" target="_blank" class="${linkStyle}">Photopea</a> (Free Photoshop clone)`,
                 `Advanced / Professional: <a href="https://www.adobe.com/products/photoshop.html" target="_blank" class="${linkStyle}">Adobe Photoshop</a>, <a href="https://www.adobe.com/products/illustrator.html" target="_blank" class="${linkStyle}">Adobe Illustrator</a>`
               ]}
+            ],
+            quiz: [
+              { q: "What is graphic design in marketing primarily about?", o: ["Directing the viewer's eye", "Making things pretty", "Using as many colors as possible", "Creating art"], a: 0 },
+              { q: "What does Visual Hierarchy dictate?", o: ["The most important element should be largest/boldest", "Everything should be the same size", "Text should be hidden", "Colors don't matter"], a: 0 },
+              { q: "What is Negative Space?", o: ["A bad design", "White space that gives text room to breathe", "Outer space", "Clutter"], a: 1 },
+              { q: "What does Negative Space increase?", o: ["Clutter", "Readability and perceived luxury", "Confusion", "File size"], a: 1 },
+              { q: "What is the Rule of Thirds?", o: ["Dividing an image into a 3x3 grid", "Using 3 colors only", "Having 3 fonts", "Posting 3 times a day"], a: 0 },
+              { q: "What does the color Blue often represent in branding?", o: ["Urgency", "Hunger", "Trust", "Anger"], a: 2 },
+              { q: "What colors do fast-food chains often use to trigger hunger/urgency?", o: ["Blue and Green", "Red and Yellow", "Black and White", "Purple and Pink"], a: 1 },
+              { q: "What is a Hex Code?", o: ["A secret password", "A 6-symbol code used to represent an exact color", "A curse", "A font style"], a: 1 },
+              { q: "What is the Hex Code for pure black?", o: ["#FFFFFF", "#000000", "#FF0000", "#123456"], a: 1 },
+              { q: "Why do VAs use Hex Codes?", o: ["To guarantee brand color consistency across platforms", "To hack computers", "To write captions", "To do SEO"], a: 0 }
             ]
           },
           {
@@ -449,6 +651,18 @@
                 `<a href="https://www.midjourney.com" target="_blank" class="${linkStyle}">Midjourney</a> & DALL-E: Great for artistic, abstract, or highly stylized conceptual art.`
               ]},
               { subtitle: "5.4 Tool Comparison Matrix", text: "Understanding which AI tool to deploy for which specific VA task is crucial for efficiency.", interactive: <AIComparisonTable /> }
+            ],
+            quiz: [
+              { q: "Will AI replace Virtual Assistants?", o: ["Yes, completely", "No, but VAs who use AI will replace those who don't", "No, AI is a fad", "Yes, in 2 months"], a: 1 },
+              { q: "What is 'Few-Shot Prompting'?", o: ["Taking photos", "Giving the AI examples of past posts to match tone", "Asking the AI only once", "Ignoring the AI"], a: 1 },
+              { q: "Why is simply pasting 'write a post about SEO' into AI a mistake?", o: ["It sounds robotic", "It breaks the computer", "It is illegal", "It costs too much"], a: 0 },
+              { q: "Which tool is known to be superior for long-form, human-like writing without buzzwords?", o: ["Midjourney", "Claude", "ChatGPT", "Canva"], a: 1 },
+              { q: "Which tool is excellent for brainstorming and formatting data tables?", o: ["ChatGPT", "Photoshop", "Midjourney", "DALL-E"], a: 0 },
+              { q: "How should you act when prompting for AI images?", o: ["Like a film director (specify lighting, angle)", "Like a robot", "Vague and generic", "Using one word"], a: 0 },
+              { q: "Which AI is highly recommended for hyper-realistic images and accurate human anatomy?", o: ["Claude", "ChatGPT", "Gemini", "Zapier"], a: 2 },
+              { q: "Midjourney is best used for what?", o: ["Writing emails", "Coding websites", "Artistic, stylized conceptual art", "Data entry"], a: 2 },
+              { q: "What is a 'cringey' AI buzzword you should avoid?", o: ["And", "Delve", "Marketing", "Sales"], a: 1 },
+              { q: "What does AI act as for a modern VA?", o: ["A boss", "A multiplier for efficiency", "A hindrance", "A client"], a: 1 }
             ]
           },
           {
@@ -467,10 +681,22 @@
                 `<a href="https://www.wix.com" target="_blank" class="${linkStyle}">Wix</a> & Squarespace: Easier, drag-and-drop builders for quick local business sites.`,
                 `<a href="https://www.gohighlevel.com" target="_blank" class="${linkStyle}">GoHighLevel</a>: Preferred by agencies because the website builder natively connects to the sales CRM and automations.`
               ]}
+            ],
+            quiz: [
+              { q: "What acts as the 'street address' of your website?", o: ["Hosting", "Domain", "SSL", "CMS"], a: 1 },
+              { q: "What acts as the 'plot of land' you rent for your website?", o: ["Hosting", "Domain", "SSL", "DNS"], a: 0 },
+              { q: "What does SSL do?", o: ["Makes the site faster", "Encrypts data (the 's' in https://)", "Translates domain names", "Builds the website"], a: 1 },
+              { q: "What happens if a site has no SSL?", o: ["It looks cooler", "Google Chrome flags it as 'Not Secure'", "It ranks #1", "Nothing"], a: 1 },
+              { q: "What does TLD stand for?", o: ["Top Level Domain", "Type of Landing Design", "Time Level Data", "None of the above"], a: 0 },
+              { q: "What are DNS records often referred to as?", o: ["The phonebook of the internet", "The SSL certificate", "The CMS", "The hosting plan"], a: 0 },
+              { q: "Which CMS powers over 40% of the internet?", o: ["Wix", "Shopify", "WordPress", "Squarespace"], a: 2 },
+              { q: "Which platform is the industry standard for E-Commerce?", o: ["GoHighLevel", "Shopify", "Wix", "WordPress"], a: 1 },
+              { q: "Why do agencies prefer GoHighLevel for websites?", o: ["It's free", "It natively connects to the sales CRM and automations", "It doesn't use domains", "It only builds apps"], a: 1 },
+              { q: "What is an 'A Record'?", o: ["A grade in school", "A type of DNS record VAs update to connect domains", "An audio file", "An SSL type"], a: 1 }
             ]
           },
           {
-            id: 7, title: "Search Engine Optimization (SEO)", icon: "fa-magnifying-glass", interactive: <SEOSimulator />,
+            id: 7, title: "Search Engine Optimization (SEO)", icon: "fa-magnifying-glass", interactive: <SEOStructureVisualizer />,
             content: [
               { subtitle: "7.1 The Three Pillars of SEO", text: "SEO is how you convince Google that your website is the best answer to a user's question. It takes time but provides the highest ROI because organic traffic is free." },
               { video: "https://www.youtube.com/embed/edkhm15FL3c" },
@@ -484,6 +710,18 @@
                 `<a href="https://search.google.com/search-console/about" target="_blank" class="${linkStyle}">Google Search Console</a>: Connect this to client sites to see exactly what keywords they currently rank for.`,
                 `<a href="https://neilpatel.com/ubersuggest/" target="_blank" class="${linkStyle}">Ubersuggest</a>: A freemium tool excellent for competitor analysis.`
               ]}
+            ],
+            quiz: [
+              { q: "Why does SEO provide the highest ROI?", o: ["Because it's instant", "Because organic traffic is free", "Because you pay per click", "Because no one uses Google"], a: 1 },
+              { q: "What is On-Page SEO?", o: ["Everything you do ON your website (content, H1 tags)", "Getting backlinks from Forbes", "Paying for Ads", "Posting on Facebook"], a: 0 },
+              { q: "What is the rule for an H1 tag?", o: ["Use 5 per page", "Use none", "Only ONE per page as the main title", "Make it small"], a: 2 },
+              { q: "What is Off-Page SEO primarily about?", o: ["Website speed", "Backlinks from other sites", "H2 tags", "Alt text"], a: 1 },
+              { q: "How does Google view a backlink from a reputable site like Forbes?", o: ["As spam", "As a massive vote of confidence", "It ignores it", "As a penalty"], a: 1 },
+              { q: "What does Technical SEO ensure?", o: ["The site is fast and mobile-friendly", "The blog has good grammar", "The social media is active", "The logo looks nice"], a: 0 },
+              { q: "What helps visually impaired users and Google Image Search understand an image?", o: ["H1 Tags", "Descriptive Alt-Text", "CSS files", "Backlinks"], a: 1 },
+              { q: "Which tool connects to a site to show exactly what keywords it currently ranks for?", o: ["Google Ads", "Google Search Console", "Facebook Pixel", "Canva"], a: 1 },
+              { q: "What is the purpose of H2 tags?", o: ["To break articles into major sections or chapters", "To make text blue", "To be the main title", "To hide text"], a: 0 },
+              { q: "What does an XML Sitemap do?", o: ["Provides a map to your physical store", "Helps Google's web crawlers read your site easily", "Designs your website layout", "Writes your blogs"], a: 1 }
             ]
           },
           {
@@ -499,6 +737,18 @@
               { subtitle: "8.3 Mastering GoHighLevel (GHL)", text: "GoHighLevel replaces the need for 10 different software subscriptions. It combines email marketing, SMS text campaigns, calendar bookings, and pipeline management." },
               { video: "https://www.youtube.com/embed/MYE6T_gd7H0" },
               { subtitle: "8.4 Pipelines and Stages", text: "In GHL, VAs build 'Pipelines' (a visual representation of the sales process). A lead moves from 'New Lead' -> 'Contacted' -> 'Appointment Booked' -> 'Closed Won'. VAs are responsible for keeping these clean." }
+            ],
+            quiz: [
+              { q: "What does CRM stand for?", o: ["Customer Record Maker", "Customer Relationship Management", "Computer Routing Machine", "Client Retention Method"], a: 1 },
+              { q: "What is the main purpose of a CRM?", o: ["To stop leads from falling through the cracks", "To design graphics", "To write blog posts", "To buy ads"], a: 0 },
+              { q: "What defines a 'Cold Lead'?", o: ["Requested a quote", "Has shown minimal interest (e.g. downloaded a PDF)", "Ready to buy", "Is a current client"], a: 1 },
+              { q: "What defines a 'Hot Lead'?", o: ["Never opened an email", "Downloaded a PDF once", "Requested a quote or booked a consultation", "Unsubscribed"], a: 2 },
+              { q: "What does a Hot Lead need?", o: ["Immediate human outreach", "To be ignored", "A cold email", "A Facebook like"], a: 0 },
+              { q: "Why is GoHighLevel (GHL) popular for agencies?", o: ["It only sends SMS", "It replaces the need for 10 different software subscriptions", "It's a social media app", "It prints brochures"], a: 1 },
+              { q: "What is a 'Pipeline' in GHL?", o: ["A plumbing tool", "A visual representation of the sales process", "An email draft", "A website builder"], a: 1 },
+              { q: "What is a VA's responsibility regarding Pipelines?", o: ["Deleting them", "Keeping the stages clean and accurate", "Ignoring them", "Hiding them from the boss"], a: 1 },
+              { q: "Which is a common stage in a Pipeline?", o: ["Appointment Booked", "Logo Designed", "Lunch Break", "Facebook Post"], a: 0 },
+              { q: "Does a CRM record every email sent and phone call made to a client?", o: ["Yes", "No", "Only on Mondays", "Only if it results in a sale"], a: 0 }
             ]
           },
           {
@@ -514,6 +764,18 @@
                 `<a href="https://zapier.com" target="_blank" class="${linkStyle}">Zapier</a>: The industry standard. Easy to learn with thousands of connections. Uses 'Triggers' and 'Actions'.`,
                 `<a href="https://www.make.com" target="_blank" class="${linkStyle}">Make (Integromat)</a>: More visual and slightly more complex, but allows for incredibly advanced, multi-branching automations at a lower cost.`
               ]}
+            ],
+            quiz: [
+              { q: "What is the main benefit of system integrations?", o: ["Makes your computer look cool", "Eliminates manual data entry and human error", "Creates graphics automatically", "Writes blogs"], a: 1 },
+              { q: "What does API stand for?", o: ["Application Programming Interface", "Automated Process Internet", "Apple Phone Integration", "Active Protocol Internet"], a: 0 },
+              { q: "How does an API function (analogy)?", o: ["Like a ringing bell", "Like a waiter periodically asking 'Is the food ready?'", "Like a chef", "Like a customer"], a: 1 },
+              { q: "How does a Webhook function (analogy)?", o: ["Like a waiter asking", "Like the kitchen ringing a bell the exact second the food is ready", "Like a menu", "Like a recipe"], a: 1 },
+              { q: "Which is generally faster and more efficient?", o: ["Webhooks", "APIs", "Manual entry", "Pigeon mail"], a: 0 },
+              { q: "What is Zapier?", o: ["An email client", "The industry standard integration tool", "A CRM", "A website builder"], a: 1 },
+              { q: "What two components does Zapier use to build workflows?", o: ["Headers and Footers", "Triggers and Actions", "Pins and Boards", "Likes and Shares"], a: 1 },
+              { q: "What does Make (Integromat) offer?", o: ["Only basic connections", "Visual, incredibly advanced, multi-branching automations", "Social media posting", "Domain hosting"], a: 1 },
+              { q: "If a Facebook Lead is added to a CRM automatically, what made this happen?", o: ["An Integration", "An intern typing fast", "Magic", "A Hashtag"], a: 0 },
+              { q: "Learning integrations turns a VA into a what?", o: ["Graphic Designer", "Automation Engineer", "Copywriter", "Video Editor"], a: 1 }
             ]
           },
           {
@@ -531,6 +793,18 @@
                 `<a href="https://convertkit.com" target="_blank" class="${linkStyle}">ConvertKit</a>: The best choice for creators, bloggers, and newsletter writers.`,
                 `<a href="https://www.gohighlevel.com" target="_blank" class="${linkStyle}">GoHighLevel</a>: Best for agencies and combining email with SMS.`
               ]}
+            ],
+            quiz: [
+              { q: "Why is an email list considered an 'owned' asset?", o: ["Because you bought it illegally", "You have direct access to their inbox anytime, immune to algorithms", "Because it is on Facebook", "Because it costs money"], a: 1 },
+              { q: "What are social media followers considered?", o: ["Owned assets", "Rented audiences", "Permanent clients", "Useless"], a: 1 },
+              { q: "What is Email Segmentation?", o: ["Sending the same email to everyone", "Tagging users based on behavior and sending specific emails", "Deleting inactive users", "Using segments of code"], a: 1 },
+              { q: "What is A/B Testing in email marketing?", o: ["Testing alphabet spelling", "Testing two subject lines to see which gets more opens", "Testing the send button twice", "Testing the spam folder"], a: 1 },
+              { q: "If Subject Line A wins the A/B test, what happens?", o: ["It gets deleted", "It gets sent to the remaining 80% of the list", "The boss is fired", "You test C and D"], a: 1 },
+              { q: "What should you avoid to prevent landing in the Spam filter?", o: ["Using their first name", "ALL CAPS and words like 'FREE MONEY'", "Asking questions", "Providing value"], a: 1 },
+              { q: "Which tool is known as best for creators, bloggers, and newsletter writers?", o: ["ConvertKit", "Mailchimp", "Salesforce", "Photoshop"], a: 0 },
+              { q: "Which tool is best for agencies combining email with SMS?", o: ["Mailchimp", "ConvertKit", "GoHighLevel", "Canva"], a: 2 },
+              { q: "Which tool is great for beginners and small e-commerce?", o: ["GoHighLevel", "ConvertKit", "Mailchimp", "Zapier"], a: 2 },
+              { q: "What is the ultimate goal of A/B testing a subject line?", o: ["To annoy people", "To get the highest Open Rate possible", "To decrease CTR", "To test the internet speed"], a: 1 }
             ]
           },
           {
@@ -548,6 +822,18 @@
                 "LTV (Lifetime Value): The total revenue a customer will spend with the business over years. If LTV is $500, a $50 CAC is highly profitable.",
                 "ROAS (Return on Ad Spend): If you spend $1 on ads and make $4 in sales, your ROAS is 4x."
               ]}
+            ],
+            quiz: [
+              { q: "What is the difference between Impressions and Reach?", o: ["They are exactly the same", "Impressions are total displays, Reach is unique individuals", "Reach is total displays, Impressions are clicks", "Reach is only for Facebook"], a: 1 },
+              { q: "If Impressions are 10k and Reach is 2k, what is the Frequency?", o: ["2", "5", "10", "20"], a: 1 },
+              { q: "What does a high Engagement Rate prove?", o: ["You spent a lot of money", "The content is resonating with the audience", "The internet is fast", "Your logo is good"], a: 1 },
+              { q: "What is considered a very healthy Engagement Rate?", o: ["0.1%", "3-5%", "50%", "100%"], a: 1 },
+              { q: "What does CTR stand for?", o: ["Cost To Run", "Click-Through Rate", "Call To Reply", "Customer Time Ratio"], a: 1 },
+              { q: "If 1,000 people see an ad and 100 click, what is the CTR?", o: ["1%", "10%", "100%", "50%"], a: 1 },
+              { q: "What does a high CTR mean?", o: ["Your Hook and CTA are incredibly strong", "Your text is too long", "You need to spend more money", "Your website is broken"], a: 0 },
+              { q: "What does CAC stand for?", o: ["Cost And Clicks", "Customer Acquisition Cost", "Client Action Code", "Company Asset Cost"], a: 1 },
+              { q: "If you spend $100 and get 2 customers, what is your CAC?", o: ["$200", "$100", "$50", "$2"], a: 2 },
+              { q: "What does ROAS stand for?", o: ["Rate of All Sales", "Return on Ad Spend", "Reach of Ad Strategy", "Revenue On Action Steps"], a: 1 }
             ]
           },
           {
@@ -560,6 +846,18 @@
                 "Phase 4: Optimization - Looking at Analytics after 7 days to pause failing ads and double the budget on winning ads."
               ]},
               { subtitle: "12.2 Elite VA Professional Skills", text: "Beyond technical skills, elite VAs communicate proactively. They send clients Weekly End-of-Day (EOD) reports summarizing exactly what was done, what the metrics look like, and what the strategy is for next week. They solve problems before the client even realizes they exist." }
+            ],
+            quiz: [
+              { q: "What happens in Phase 1 (Market Research) of a campaign?", o: ["Scheduling posts", "Using tools to see what competitors are ranking for", "Sending emails", "Pausing ads"], a: 1 },
+              { q: "What happens in Phase 2 (Strategy)?", o: ["Deciding the mix of Organic Content and Ads", "Testing webhooks", "Looking at analytics", "Writing EOD reports"], a: 0 },
+              { q: "What happens in Phase 3 (Execution)?", o: ["Researching", "Pausing ads", "The VA schedules posts and sets up automations", "Brainstorming"], a: 2 },
+              { q: "What happens in Phase 4 (Optimization)?", o: ["Looking at Analytics to pause failing ads and double winning ones", "Setting up GHL", "Designing logos", "Doing nothing"], a: 0 },
+              { q: "How long should you typically wait before optimizing an ad campaign?", o: ["1 hour", "7 days", "1 year", "Never"], a: 1 },
+              { q: "What is an EOD report?", o: ["End of Day report", "End of Data report", "Every Other Day report", "Email Operations Document"], a: 0 },
+              { q: "What should be included in an EOD report?", o: ["Personal complaints", "Summary of what was done, metrics, and next week's strategy", "Memes", "Only the bad news"], a: 1 },
+              { q: "What makes an 'Elite' VA different from a basic VA?", o: ["They charge less", "They wait for instructions", "They communicate proactively and solve problems early", "They don't use AI"], a: 2 },
+              { q: "What action do you take on winning ads during optimization?", o: ["Pause them", "Double the budget", "Delete them", "Change the image"], a: 1 },
+              { q: "Is execution the final step of a marketing campaign?", o: ["Yes", "No, Optimization is", "Yes, then you sleep", "No, Research is"], a: 1 }
             ]
           },
           {
@@ -573,6 +871,18 @@
                 "4. Hashtags: Place them at the very bottom, separated by space so they don't clutter the reading experience."
               ]},
               { subtitle: "13.3 Writing for Different Platforms", text: "LinkedIn requires professional, story-driven, text-heavy captions. Instagram relies on short, punchy, aesthetically formatted text. TikTok captions are very brief and prioritize keywords for the search algorithm." }
+            ],
+            quiz: [
+              { q: "What is a caption considered in digital marketing?", o: ["Micro-copywriting", "A waste of time", "Just a description", "Only for hashtags"], a: 0 },
+              { q: "Should you write a caption that simply describes what is in the photo?", o: ["Yes, always", "No, never", "Only on Facebook", "Only if it's a dog"], a: 1 },
+              { q: "What is the most critical part of the caption?", o: ["The Hashtags", "The Body", "The Hook", "The Emoji"], a: 2 },
+              { q: "What must the Hook do?", o: ["Disrupt the scroll", "Be boring", "Ask for a sale", "Be 5 paragraphs long"], a: 0 },
+              { q: "How should you format the Body of a caption?", o: ["One massive block of text", "Break up large blocks using line breaks", "All lowercase", "With no vowels"], a: 1 },
+              { q: "How many commands should you give in a Call-to-Action (CTA)?", o: ["As many as possible", "At least three", "Only ONE command", "Zero"], a: 2 },
+              { q: "What happens if you ask users to 'Like, comment, share, and buy' all at once?", o: ["They will do all of them", "They will do nothing (Choice Paralysis)", "They will give you money", "The post goes viral"], a: 1 },
+              { q: "Where should Hashtags be placed?", o: ["In the Hook", "In the middle of sentences", "At the very bottom, separated by space", "In the image"], a: 2 },
+              { q: "What style of caption does LinkedIn require?", o: ["Short and punchy", "Very brief keywords", "Professional, story-driven, text-heavy", "No text at all"], a: 2 },
+              { q: "What do TikTok captions prioritize?", o: ["Long stories", "Keywords for the search algorithm", "No hashtags", "Professional essays"], a: 1 }
             ]
           },
           {
@@ -585,10 +895,22 @@
                 "Brand Tags: Always include the client's custom tag (e.g., #Nike) so users can click it and see a gallery of all your branded content."
               ]},
               { subtitle: "14.3 Monitoring and Adjusting", text: "Use platform insights to see how many impressions came directly 'From Hashtags'. If that number drops over time, your current hashtag set is likely exhausted or shadowbanned. Rotate your sets weekly." }
+            ],
+            quiz: [
+              { q: "What do hashtags act as today?", o: ["Just cool words", "SEO categorization tags for the platform's AI", "Spam indicators", "Passwords"], a: 1 },
+              { q: "Why should you avoid using ONLY massive tags like #Business?", o: ["They are illegal", "Your post will be buried in seconds", "They cost money", "No one follows them"], a: 1 },
+              { q: "What is Volume Laddering?", o: ["Climbing a ladder to post", "Mixing massive, medium, and hyper-niche tags", "Using only big tags", "Using no tags"], a: 1 },
+              { q: "Which tag is more valuable for a local Chicago dentist?", o: ["#Dentist", "#Teeth", "#ChicagoDentist", "#Smile"], a: 2 },
+              { q: "Why use a Brand Tag (e.g., #Nike)?", o: ["So users can click it and see a gallery of your branded content", "To trick the algorithm", "To hide the post", "Because you have to"], a: 0 },
+              { q: "How do you know if your hashtags are working?", o: ["By guessing", "Checking insights for impressions 'From Hashtags'", "Asking the client", "Counting the likes"], a: 1 },
+              { q: "What should you do if your hashtag impressions drop over time?", o: ["Keep using them", "Stop using hashtags", "Rotate your sets weekly", "Delete your account"], a: 2 },
+              { q: "What does the AI algorithm do with hashtags?", o: ["Ignores them", "Uses them to know exactly who to serve your content to", "Deletes them", "Makes them blue"], a: 1 },
+              { q: "Is #Marketing considered a broad or niche tag?", o: ["Hyper-niche", "Local", "Broad/Massive", "Brand"], a: 2 },
+              { q: "True or False: Hashtags have evolved from pure discovery to SEO categorization.", o: ["False", "True", "Only on Twitter", "Only for verified users"], a: 1 }
             ]
           },
           {
-            id: 15, title: "SEO for Virtual Assistants", icon: "fa-bullseye",
+            id: 15, title: "SEO for Virtual Assistants", icon: "fa-bullseye", interactive: <SEOStructureVisualizer />,
             content: [
               { subtitle: "15.1 VA Roles in SEO", text: "While you may not be a senior SEO engineer, a VA is heavily involved in the execution. You will be asked to upload blog posts, format headers, add internal links, and compress images so the site loads faster." },
               { subtitle: "15.2 Critical On-Page SEO Checklist", list: [
@@ -598,6 +920,18 @@
                 "Internal Linking: Linking from your new blog post to an older blog post on your site. This passes 'link juice' and keeps users on the site longer."
               ]},
               { subtitle: "15.3 Image SEO Mastery", text: "Never upload an image named 'IMG_4092.jpg'. Rename it to 'digital-marketing-virtual-assistant.jpg' before uploading. Then, add descriptive Alt-Text describing the image for visually impaired users. Google's image search relies entirely on this data." }
+            ],
+            quiz: [
+              { q: "Does a VA need to be a senior SEO engineer to help with SEO?", o: ["Yes", "No, VAs are heavily involved in execution (uploading, formatting)", "Only if they code", "Only for off-page"], a: 1 },
+              { q: "How many H1 tags should be on a single page?", o: ["None", "Five", "Only ONE", "As many as possible"], a: 2 },
+              { q: "What should the H1 tag contain?", o: ["A joke", "The primary keyword", "A link to another site", "The company phone number"], a: 1 },
+              { q: "Why does Google read H2 and H3 tags?", o: ["To understand the page structure logically", "To find spelling errors", "To charge you money", "To find images"], a: 0 },
+              { q: "Does a Meta Description directly impact your ranking position?", o: ["Yes, massively", "No, but a compelling one increases CTR (which Google rewards)", "It gets you banned", "It replaces the H1"], a: 1 },
+              { q: "What is Internal Linking?", o: ["Linking to Forbes", "Linking from your new blog post to an older blog post on your site", "Buying links", "Linking to your Facebook"], a: 1 },
+              { q: "What is the benefit of Internal Linking?", o: ["Passes 'link juice' and keeps users on the site longer", "Makes the text blue", "Breaks the site", "Removes viruses"], a: 0 },
+              { q: "What is the biggest mistake when uploading an image?", o: ["Naming it 'digital-marketing.jpg'", "Naming it 'IMG_4092.jpg'", "Making it small", "Adding Alt-Text"], a: 1 },
+              { q: "What must you do before uploading an image?", o: ["Rename it to describe the content with keywords", "Delete it", "Print it", "Change its colors"], a: 0 },
+              { q: "What does Google's image search rely entirely on?", o: ["The image resolution", "Descriptive Alt-Text and file names", "The camera used", "The H1 tag"], a: 1 }
             ]
           },
           {
@@ -610,6 +944,18 @@
                 "Site Audit: A tool that crawls the website and provides a list of errors (broken links, missing tags, slow pages). A VA can export this report and fix the errors systematically."
               ]},
               { subtitle: "16.3 Competitor Research", text: "You can plug a competitor's domain into SEMrush and instantly see exactly which keywords bring them the most traffic, and even view the exact Google Ads they are currently paying to run." }
+            ],
+            quiz: [
+              { q: "What is SEMrush considered?", o: ["A photo editor", "The gold standard tool for serious SEO research", "A CRM", "An email sender"], a: 1 },
+              { q: "What does SEMrush allow you to do to competitors?", o: ["Spy on them and see their traffic/keywords", "Delete their website", "Hack their emails", "Call their clients"], a: 0 },
+              { q: "What is the Keyword Magic Tool used for?", o: ["Making logos", "Finding long-tail keywords", "Sending SMS", "Auditing site speed"], a: 1 },
+              { q: "Why are long-tail keywords valuable?", o: ["They have higher search volume", "They are shorter", "They have lower search volume but much higher intent to purchase", "They are free"], a: 2 },
+              { q: "What does KD stand for?", o: ["Keyword Data", "Keyword Difficulty", "Knowledge Domain", "Key Demographics"], a: 1 },
+              { q: "If a client's website is brand new, what KD should a VA filter out?", o: ["Keywords with KD under 10", "Keywords with KD over 30 (too competitive)", "Keywords with KD equal to 0", "All keywords"], a: 1 },
+              { q: "What does the Site Audit tool do?", o: ["Crawls the website and provides a list of errors", "Writes blog posts", "Generates images", "Posts to Twitter"], a: 0 },
+              { q: "What is an example of an error found in a Site Audit?", o: ["A bad logo", "Broken links and slow pages", "A boring caption", "A low engagement rate"], a: 1 },
+              { q: "Can SEMrush show you the exact Google Ads a competitor is running?", o: ["Yes", "No", "Only if you ask them", "Only on Sundays"], a: 0 },
+              { q: "Does knowing SEMrush make a VA highly valuable?", o: ["No, it's outdated", "Yes, it's an enterprise-level platform", "Only for graphic design", "Only for email marketing"], a: 1 }
             ]
           },
           {
@@ -617,7 +963,7 @@
             content: [
               { subtitle: "17.1 Educational Framework (Value First)", list: [
                 "Hook: The biggest lie you've been told about SEO.",
-                "Body: Everyone says you need more backlinks. But if your on-page structure is broken, sending traffic to it is like pouring water into a leaky bucket. Focus on your H1s, internal linking, and load speed first.",
+                "Body: Everyone says you need more backlinks. But if your on-page structure is broken, sending traffic to it is like pouring water into a search engine. Focus on your H1s, internal linking, and load speed first.",
                 "CTA: Save this post to use as an audit checklist for your own website.",
                 "Hashtags: #SEOTips #WebsiteAudit #VirtualAssistant"
               ]},
@@ -631,6 +977,18 @@
                 "Body: We have seen massive shifts in where business owners consume content. The raw authenticity of video is converting faster than polished corporate posts.",
                 "CTA: Do you agree or disagree? Let's debate in the comments below."
               ]}
+            ],
+            quiz: [
+              { q: "What is the primary goal of the Educational Framework?", o: ["To ask for a sale immediately", "To provide Value First", "To trigger an argument", "To use no hashtags"], a: 1 },
+              { q: "In the Educational example, what does the Hook do?", o: ["Makes a bold claim ('The biggest lie...')", "Asks for money", "Says hello", "Lists hashtags"], a: 0 },
+              { q: "What is the CTA in the Educational example?", o: ["Buy my course", "Save this post to use as an audit checklist", "Call me now", "Don't click this"], a: 1 },
+              { q: "What does the PAS formula stand for in the Promotional Framework?", o: ["Post/Always/Sell", "Problem/Agitate/Solution", "Primary/Action/Strategy", "Public/Awareness/System"], a: 1 },
+              { q: "In the Promotional example, what is the 'Problem'?", o: ["Spending 10 hours a week answering emails", "Having too much money", "A broken website", "A bad logo"], a: 0 },
+              { q: "In the Promotional example, what is the 'Agitate' phase?", o: ["Offering the VA service", "Stating it leads to burnout and missed opportunities", "Asking them to comment", "Using emojis"], a: 1 },
+              { q: "In the Promotional example, what is the 'Solution'?", o: ["Certified VAs taking over the inbox", "Working harder", "Deleting the email account", "Buying a new laptop"], a: 0 },
+              { q: "What is the primary goal of the Engagement Framework?", o: ["To sell a product", "Community Building / Starting a conversation", "To teach SEO", "To hide content"], a: 1 },
+              { q: "In the Engagement example, what kind of Hook is used?", o: ["A boring fact", "An 'Unpopular opinion' to spark debate", "A discount code", "A greeting"], a: 1 },
+              { q: "In the Engagement example, what is the CTA?", o: ["Click link in bio", "Do you agree or disagree? Let's debate in the comments", "Save this for later", "Send me a DM"], a: 1 }
             ]
           },
           {
@@ -648,6 +1006,18 @@
                 "Master Cold Outreach: Use your new copywriting skills to pitch local businesses on how you can improve their SEO or manage their CRM.",
                 "Continuous Learning: Digital marketing changes weekly. Stay updated on algorithm shifts and new AI tools."
               ]}
+            ],
+            quiz: [
+              { q: "What is the first recommended Next Step for Career Growth?", o: ["Wait for clients to find you", "Build a Portfolio with mock campaigns", "Quit your job immediately", "Buy a more expensive computer"], a: 1 },
+              { q: "Why should you create mock campaigns and graphics?", o: ["Because it's fun", "To prove your skills to potential clients without needing prior client experience", "To waste time", "To post on your personal Facebook"], a: 1 },
+              { q: "What is Cold Outreach?", o: ["Pitching local businesses your services using your copywriting skills", "Standing in the snow", "Ignoring emails", "Calling your friends"], a: 0 },
+              { q: "What should you pitch to local businesses?", o: ["How you can improve their SEO or manage their CRM", "That you need a job", "That their logo is ugly", "Nothing"], a: 0 },
+              { q: "Why is Continuous Learning necessary in Digital Marketing?", o: ["It isn't", "Because the industry, algorithms, and AI tools change weekly", "Because clients require college degrees", "To memorize the dictionary"], a: 1 },
+              { q: "As a specialized VA, you can now analyze complex metrics like CAC and ROAS. What do you do with this?", o: ["Keep it secret", "Translate them into actionable business advice for clients", "Delete the data", "Change the numbers to look good"], a: 1 },
+              { q: "What tool were you trained to use for CRM pipelines?", o: ["Photoshop", "GoHighLevel", "Canva", "Excel"], a: 1 },
+              { q: "What tools were you trained to use for Automations?", o: ["Webhooks and Zapier", "H1 and H2 tags", "Instagram and TikTok", "Mailchimp and ConvertKit"], a: 0 },
+              { q: "What tools were you trained to use for AI Prompt Engineering?", o: ["Zapier", "ChatGPT and Gemini", "Wix", "Shopify"], a: 1 },
+              { q: "You have transitioned from a general administrative assistant into a what?", o: ["Software Engineer", "Specialized Digital Marketing Virtual Assistant", "CEO", "Graphic Designer"], a: 1 }
             ]
           }
         ];
@@ -655,9 +1025,24 @@
         function App() {
           const [activeModuleId, setActiveModuleId] = useState(1);
           const [sidebarOpen, setSidebarOpen] = useState(false);
+          const [unlockedModules, setUnlockedModules] = useState([1]); // Only module 1 unlocked by default
 
           const activeModule = COURSE_DATA.find(m => m.id === activeModuleId);
-          const progress = (activeModuleId / COURSE_DATA.length) * 100;
+          const progress = (unlockedModules.length / COURSE_DATA.length) * 100;
+          const isCurrentModulePassed = unlockedModules.includes(activeModuleId + 1) || (activeModuleId === COURSE_DATA.length && unlockedModules.includes('completed'));
+
+          const handleModulePass = () => {
+            if (activeModuleId === COURSE_DATA.length) {
+              if (!unlockedModules.includes('completed')) {
+                setUnlockedModules([...unlockedModules, 'completed']);
+              }
+            } else {
+              if (!unlockedModules.includes(activeModuleId + 1)) {
+                setUnlockedModules([...unlockedModules, activeModuleId + 1]);
+              }
+            }
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          };
 
           return (
             <div className="flex h-screen bg-slate-50 font-sans text-slate-900 overflow-hidden selection:bg-slate-200 selection:text-slate-900">
@@ -688,7 +1073,7 @@
                 <div className="flex-1 overflow-y-auto py-6 custom-scrollbar bg-slate-50">
                   <div className="px-6 mb-6">
                     <div className="flex justify-between text-xs font-bold text-slate-500 mb-2 uppercase tracking-wider">
-                      <span>Course Progress</span>
+                      <span>Course Unlocked</span>
                       <span className="text-slate-800">{Math.round(progress)}%</span>
                     </div>
                     <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden shadow-inner">
@@ -699,17 +1084,26 @@
                   <ul className="space-y-1.5 px-4">
                     {COURSE_DATA.map((mod) => {
                       const isActive = activeModuleId === mod.id;
+                      const isUnlocked = unlockedModules.includes(mod.id);
+                      
                       return (
                         <li key={mod.id}>
                           <button
-                            onClick={() => { setActiveModuleId(mod.id); setSidebarOpen(false); }}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-left border ${isActive ? 'bg-white text-slate-900 font-bold border-slate-200 shadow-sm border-l-4 border-l-slate-900' : 'bg-transparent text-slate-600 border-transparent hover:bg-slate-200 hover:text-slate-900 font-semibold'}`}
+                            onClick={() => { if(isUnlocked) { setActiveModuleId(mod.id); setSidebarOpen(false); } }}
+                            disabled={!isUnlocked}
+                            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 text-left border 
+                              ${isActive ? 'bg-white text-slate-900 font-bold border-slate-200 shadow-sm border-l-4 border-l-slate-900' : 
+                                isUnlocked ? 'bg-transparent text-slate-600 border-transparent hover:bg-slate-200 hover:text-slate-900 font-semibold cursor-pointer' : 
+                                'bg-slate-100 text-slate-400 border-slate-100 cursor-not-allowed opacity-60'}`}
                           >
-                            <i className={`fa-solid ${mod.icon} w-5 h-5 flex-shrink-0 ${isActive ? 'text-slate-900' : 'text-slate-400'}`}></i>
-                            <span className="text-sm leading-tight line-clamp-2">
-                              <span className={`opacity-70 mr-1.5 ${isActive ? 'text-slate-900' : ''}`}>{mod.id}.</span> 
-                              {mod.title}
-                            </span>
+                            <div className="flex items-center gap-3">
+                              <i className={`fa-solid ${mod.icon} w-5 h-5 flex-shrink-0 ${isActive ? 'text-slate-900' : isUnlocked ? 'text-slate-500' : 'text-slate-300'}`}></i>
+                              <span className="text-sm leading-tight line-clamp-2">
+                                <span className={`opacity-70 mr-1.5 ${isActive ? 'text-slate-900' : ''}`}>{mod.id}.</span> 
+                                {mod.title}
+                              </span>
+                            </div>
+                            {!isUnlocked && <i className="fa-solid fa-lock text-slate-300 text-xs"></i>}
                           </button>
                         </li>
                       );
@@ -722,7 +1116,7 @@
               <main className="flex-1 flex flex-col h-full bg-white relative overflow-hidden z-10">
                 
                 {/* Top Header */}
-                <header className="flex items-center gap-4 p-5 md:p-8 border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-10">
+                <header className="flex items-center gap-4 p-5 md:p-8 border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-20">
                   <button className="md:hidden p-2.5 rounded-lg bg-slate-50 text-slate-600 border border-slate-200 hover:bg-slate-100" onClick={() => setSidebarOpen(true)}>
                     <i className="fa-solid fa-bars w-5 h-5"></i>
                   </button>
@@ -733,7 +1127,7 @@
                 </header>
 
                 {/* Content Scroll Area */}
-                <div className="flex-1 overflow-y-auto p-5 md:p-10 custom-scrollbar pb-32 bg-white">
+                <div className="flex-1 overflow-y-auto p-5 md:p-10 custom-scrollbar pb-32 bg-white scroll-smooth" id="main-scroll-area">
                   <div className="max-w-4xl mx-auto space-y-12">
                     
                     {activeModule.content.map((section, idx) => (
@@ -796,22 +1190,45 @@
                       </div>
                     )}
 
+                    {/* Strict Module Quiz Section */}
+                    {activeModule.quiz && (
+                       <QuizSection 
+                          questions={activeModule.quiz} 
+                          moduleId={activeModule.id} 
+                          onPass={handleModulePass} 
+                          isPassed={isCurrentModulePassed}
+                       />
+                    )}
+
                     {/* Navigation Buttons */}
                     <div className="flex justify-between items-center pt-12 mt-16 border-t border-slate-200">
                       <button 
-                        onClick={() => setActiveModuleId(Math.max(1, activeModuleId - 1))}
+                        onClick={() => {
+                          setActiveModuleId(Math.max(1, activeModuleId - 1));
+                          document.getElementById('main-scroll-area').scrollTo(0,0);
+                        }}
                         disabled={activeModuleId === 1}
                         className="px-6 py-3 rounded-xl border-2 border-slate-300 text-slate-700 font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:border-slate-900 hover:text-slate-900 transition-colors text-sm"
                       >
                         Previous Module
                       </button>
-                      <button 
-                        onClick={() => setActiveModuleId(Math.min(COURSE_DATA.length, activeModuleId + 1))}
-                        disabled={activeModuleId === COURSE_DATA.length}
-                        className="px-6 py-3 rounded-xl bg-slate-900 text-white font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black transition-colors flex items-center gap-2 text-sm shadow-md"
-                      >
-                        Next Module <i className="fa-solid fa-play w-4 h-4"></i>
-                      </button>
+
+                      {isCurrentModulePassed ? (
+                        <button 
+                          onClick={() => {
+                            setActiveModuleId(Math.min(COURSE_DATA.length, activeModuleId + 1));
+                            document.getElementById('main-scroll-area').scrollTo(0,0);
+                          }}
+                          disabled={activeModuleId === COURSE_DATA.length}
+                          className="px-6 py-3 rounded-xl bg-slate-900 text-white font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black transition-colors flex items-center gap-2 text-sm shadow-md"
+                        >
+                          {activeModuleId === COURSE_DATA.length ? 'Course Completed' : 'Next Module'} <i className="fa-solid fa-play w-4 h-4"></i>
+                        </button>
+                      ) : (
+                        <div className="px-6 py-3 rounded-xl bg-slate-100 text-slate-400 font-bold border border-slate-200 flex items-center gap-2 text-sm cursor-not-allowed">
+                          <i className="fa-solid fa-lock"></i> Pass Quiz to Unlock Next
+                        </div>
+                      )}
                     </div>
 
                   </div>
